@@ -12,16 +12,21 @@ public class jsonToJava {
 	    
 		//object of statement to execute queries
 		Statement st=conn.createStatement();
-		ResultSet rs=st.executeQuery("select * from CustomerInfo where Location ='asia'");
+		ResultSet rs=st.executeQuery("select * from CustomerInfo where Location ='asia' LIMIT 1");
 		
 		//setting pointer to a row
 	    while(rs.next()) 
 	    {
-	    	System.out.println(rs.getString(1));
-	    	System.out.println(rs.getString(2));
-	    	System.out.println(rs.getInt(3));
-	    	System.out.println(rs.getString(4));
+	    	
+	    	CoinDetails c= new CoinDetails();
+	    	
+	    	c.setCourseName(rs.getString(1));
+	    	c.setPurchaseDate(rs.getString(2));
+	    	c.setAmount(rs.getInt(3));
+	    	c.setLocation(rs.getString(4));
+	 
 	    }
+	    conn.close();
 	}
 
 }

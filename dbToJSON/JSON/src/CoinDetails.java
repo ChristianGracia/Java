@@ -1,5 +1,11 @@
 
 public class CoinDetails {
+	
+	private String courseName;
+	private String PurchaseDate;
+	private int Amount;
+	private String Location;
+	
 	public String getCourseName() {
 		return courseName;
 	}
@@ -24,9 +30,6 @@ public class CoinDetails {
 	public void setLocation(String location) {
 		Location = location;
 	}
-	private String courseName;
-	private String PurchaseDate;
-	private int Amount;
-	private String Location;
+
 
 }
