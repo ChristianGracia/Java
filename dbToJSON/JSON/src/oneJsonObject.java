@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -62,8 +64,19 @@ public class oneJsonObject {
 	    JSONObject jo=new JSONObject();
 	    jo.put("data", js);
 	    
-	    System.out.println(jo.toJSONString());
-
+	    
+		String unescapeString = StringEscapeUtils.unescapeJava(jo.toJSONString());
+	    String temp = unescapeString.replace("\"{", "{");
+	    String finalString = temp.replace("}\"", "}");
+	    System.out.println(finalString);
+	    
+		try (FileWriter file = new FileWriter("C:\\Users\\chris\\eclipse-workspace\\JSON\\coinSingleJson.json")) {
+			file.write(finalString);
+			System.out.println("Successfully Copied JSON Object to File...");
+			System.out.println("\nJSON Object: " + finalString);
+		}
+		
+		
 	    conn.close();
 	}
 
