@@ -12,4 +12,4 @@ INSERT INTO CustomerInfo values("etheruem", CURRENT_DATE(), 91, 'asia');
 INSERT INTO CustomerInfo values("doge", CURRENT_DATE(), 20, 'asia');
 INSERT INTO CustomerInfo values("engima", CURRENT_DATE(), 70, 'asia');
 
-select * from CustomerInfo where PurchaseDate=CURDATE() and Location ='Asia';
+select * from CustomerInfo where Location ='Asia';
