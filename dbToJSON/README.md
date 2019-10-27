@@ -6,4 +6,4 @@ uses
 
 **maven**
 
-**jackson**
+**jackson api**

@@ -15,17 +15,17 @@ public class jsonToJava {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn=null;
 		CoinDetails c= new CoinDetails();
-		conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Business", "root", "Christian12!");
+		conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Crypto", "root", "Christian12!");
 	    
 		//object of statement to execute queries
 		Statement st=conn.createStatement();
-		ResultSet rs=st.executeQuery("select * from CustomerInfo where Location ='asia' LIMIT 1");
+		ResultSet rs=st.executeQuery("select * from CoinInfo where Location ='asia' LIMIT 1");
     	
 		
 		//setting pointer to a row
 	    while(rs.next()) 
 	    {
-	    	c.setCourseName(rs.getString(1));
+	    	c.setCoinName(rs.getString(1));
 	    	c.setPurchaseDate(rs.getString(2));
 	    	c.setAmount(rs.getInt(3));
 	    	c.setLocation(rs.getString(4));

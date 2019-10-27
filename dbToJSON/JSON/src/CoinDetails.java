@@ -1,16 +1,16 @@
 
 public class CoinDetails {
 	
-	private String courseName;
+	private String coinName;
 	private String PurchaseDate;
 	private int Amount;
 	private String Location;
 	
-	public String getCourseName() {
-		return courseName;
+	public String getCoinName() {
+		return coinName;
 	}
-	public void setCourseName(String courseName) {
-		this.courseName = courseName;
+	public void setCoinName(String coinName) {
+		this.coinName = coinName;
 	}
 	public String getPurchaseDate() {
 		return PurchaseDate;
