@@ -4,6 +4,12 @@ This program written in Java takes data from a mysql database and converts it to
 
 uses
 
-**maven**
+**Maven**
 
-**jackson api**
+**Jackson api**
+
+**Gson**
+
+**Json simple**
+
+**Apache commons text**
