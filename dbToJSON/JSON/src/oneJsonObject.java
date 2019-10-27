@@ -13,6 +13,7 @@ import org.json.simple.JSONObject;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 public class oneJsonObject {
 	public static void main(String[] args) throws ClassNotFoundException, SQLException, JsonGenerationException, JsonMappingException, IOException {
@@ -21,6 +22,7 @@ public class oneJsonObject {
 		
 		Connection conn=null;
 		ArrayList<CoinDetails> a= new ArrayList<CoinDetails>();
+		JSONArray js=new JSONArray();
 		
 	
 		conn=DriverManager.getConnection("jdbc:mysql://localhost:3306/Crypto", "root", "Christian12!");
@@ -47,19 +49,21 @@ public class oneJsonObject {
 	    for (int i = 0; i < a.size(); i++) {
 		    ObjectMapper o=new ObjectMapper();
 		    o.writeValue(new File("C:\\Users\\chris\\eclipse-workspace\\JSON\\coinInfo" + i + ".json"), a.get(i));
-	    	
+		    
+		    //create json string from java object
+		    Gson g=new Gson();
+		    String jsonString= g.toJson(a.get(i));
+		    js.add(jsonString);
+		    
 	    }
 	    
-	    //create json string from java object
-	    
+
 	    //add json simple
 	    JSONObject jo=new JSONObject();
-	    JSONArray js=new JSONArray();
-	    
 	    jo.put("data", js);
+	    
+	    System.out.println(jo.toJSONString());
 
-	    
-	    
 	    conn.close();
 	}
 
