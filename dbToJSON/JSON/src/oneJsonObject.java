@@ -49,8 +49,8 @@ public class oneJsonObject {
 	    }
 	    
 	    for (int i = 0; i < a.size(); i++) {
-		    ObjectMapper o=new ObjectMapper();
-		    o.writeValue(new File("C:\\Users\\chris\\eclipse-workspace\\JSON\\coinInfo" + i + ".json"), a.get(i));
+//		    ObjectMapper o=new ObjectMapper();
+//		    o.writeValue(new File("C:\\Users\\chris\\eclipse-workspace\\JSON\\coinInfo" + i + ".json"), a.get(i));
 		    
 		    //create json string from java object
 		    Gson g=new Gson();
