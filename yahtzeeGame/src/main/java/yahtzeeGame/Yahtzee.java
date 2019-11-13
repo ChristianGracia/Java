@@ -22,8 +22,6 @@ public class Yahtzee {
 			fillArray[i] = roll();
 		}
 		setDiceArray(fillArray);
-		System.out.print("dice rolled are: ");
-		System.out.println(Arrays.toString(getDiceArray()));
 	}
 
 	public void play() {
@@ -31,19 +29,23 @@ public class Yahtzee {
 		while(turns < 2) {
 			reroll();		
 		}
+		System.out.println(Arrays.toString(getDiceArray()));
+		System.out.println("game over!");
+		
+		
 		
 	}
 	private void reroll() {
+		int[] currentArray = getDiceArray();
+		System.out.print("dice rolled are: ");
+		System.out.println(Arrays.toString(currentArray));
 		System.out.println("Enter the index of the dice you want to reroll");
 		readWantedRerolls();
-		fillArray();
 		setTurns();
 		boolean check = checkYahtzee();
 		if (check) {
 			System.out.println("yahztee!");
 		}
-		
-	
 	}
 
 	private boolean checkYahtzee() {
@@ -51,7 +53,7 @@ public class Yahtzee {
 		int[] checkYahtzee = getDiceArray();
 		int num = checkYahtzee[0];
 		boolean check = true;
-		for(int i = 1; i < 6; i++) {
+		for(int i = 1; i < 5; i++) {
 			if(checkYahtzee[i] != num) {
 				check = false;
 			}
@@ -89,7 +91,7 @@ public class Yahtzee {
         	try {
     			indices = reader.readLine();
     			if(tryParseInt(indices)) {
-    				temp[Integer.parseInt(indices)] = 0;
+    				temp[Integer.parseInt(indices)] = roll();
     			}
     	
     			
