@@ -45,6 +45,7 @@ public class Yahtzee {
 		boolean check = checkYahtzee();
 		if (check) {
 			System.out.println("yahztee!");
+			setTurns();
 		}
 	}
 
