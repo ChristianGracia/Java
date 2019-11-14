@@ -1,0 +1,5 @@
+package diceGame;
+
+class DamageGame {
+
+}
