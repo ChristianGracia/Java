@@ -12,7 +12,6 @@ public class Yahtzee {
 	
 	public Yahtzee() {
 	   fillArray();
-	
 	}
 	
 	private void fillArray() {
@@ -25,24 +24,25 @@ public class Yahtzee {
 	}
 
 	public void play() {
+		System.out.println("Welcome to Yahztee");
 
 		while(turns < 2) {
 			reroll();		
 		}
 		System.out.println(Arrays.toString(getDiceArray()));
-		System.out.println("game over!");
+		System.out.println("Game Over!");
 		
 	}
 	private void reroll() {
 		int[] currentArray = getDiceArray();
-		System.out.print("dice rolled are: ");
+		System.out.print("Dice rolled are: ");
 		System.out.println(Arrays.toString(currentArray));
-		System.out.println("Enter the index of the dice you want to reroll");
+		System.out.println("Enter 1-5 to select die to be rolled, then send a letter to break and roll all selected");
 		readWantedRerolls();
 		setTurns();
 		boolean check = checkYahtzee();
 		if (check) {
-			System.out.println("yahztee!");
+			System.out.println("Yahztee!");
 			setTurns();
 			setTurns();
 		}
@@ -90,20 +90,20 @@ public class Yahtzee {
         while (tryParseInt(indices) && Integer.parseInt(indices) < 6 && Integer.parseInt(indices) > -1) {
         	try {
     			indices = reader.readLine();
-    			if(tryParseInt(indices)) {
-    				temp[Integer.parseInt(indices)] = 0;
+    			if(tryParseInt(indices) && Integer.parseInt(indices) < 7 && Integer.parseInt(indices) > -1) {
+    				temp[Integer.parseInt(indices) - 1] = roll();
+    			}
+    			else {
+    				System.out.println("Incorrect input. Rolling selected");
+    				
     			}
     	
     			
     		} catch (IOException e) {
     			e.printStackTrace();
+    	
     		} 
         	
-        }
-        for (int item : temp) {
-        	if (item == 0) {
-        		item = roll();
-        	}
         }
         setDiceArray(temp);
 	
