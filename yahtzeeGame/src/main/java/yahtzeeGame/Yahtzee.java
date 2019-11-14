@@ -32,8 +32,6 @@ public class Yahtzee {
 		System.out.println(Arrays.toString(getDiceArray()));
 		System.out.println("game over!");
 		
-		
-		
 	}
 	private void reroll() {
 		int[] currentArray = getDiceArray();
@@ -45,6 +43,7 @@ public class Yahtzee {
 		boolean check = checkYahtzee();
 		if (check) {
 			System.out.println("yahztee!");
+			setTurns();
 			setTurns();
 		}
 	}
@@ -92,7 +91,7 @@ public class Yahtzee {
         	try {
     			indices = reader.readLine();
     			if(tryParseInt(indices)) {
-    				temp[Integer.parseInt(indices)] = roll();
+    				temp[Integer.parseInt(indices)] = 0;
     			}
     	
     			
@@ -100,6 +99,11 @@ public class Yahtzee {
     			e.printStackTrace();
     		} 
         	
+        }
+        for (int item : temp) {
+        	if (item == 0) {
+        		item = roll();
+        	}
         }
         setDiceArray(temp);
 	
