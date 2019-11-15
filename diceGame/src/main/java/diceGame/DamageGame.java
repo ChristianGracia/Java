@@ -10,28 +10,34 @@ public class DamageGame {
  private int numberOfSides;
  private int armorClass;
  private int damageModifier;
- private boolean criticalHit = false;
+ private boolean criticalHit = true;
  private boolean criticalMiss = false;
 
  public DamageGame() {
 
 
   System.out.println("Welcome to Dice Roll Damage Calculator\n");
+  getModifiers();
   checkIfHitorMiss();
 
  }
+ 
+ private void getModifiers() {
+	  System.out.println("Enter the damage modifier");
+	  setDamageModifier(readInteger(-100, 100));
+
+	  System.out.println("Enter the armor class");
+	  setArmorClass(readInteger(0, 100));
+
+	  System.out.print("Damage Modifier: ");
+	  System.out.println(getDamageModifier());
+	  System.out.print("Armor Class: ");
+	  System.out.println(getArmorClass());
+	 
+ }
 
  private void checkIfHitorMiss() {
-  System.out.println("Enter the damage modifier");
-  setDamageModifier(readInteger());
 
-  System.out.println("Enter the armor class");
-  setArmorClass(readInteger());
-
-  System.out.print("Damage Modifier: ");
-  System.out.println(getDamageModifier());
-  System.out.print("Armor Class: ");
-  System.out.println(getArmorClass());
 
   System.out.print("\nroll: ");
   Dice dice = new Dice20Side(20);
@@ -45,36 +51,35 @@ public class DamageGame {
  
  private void checkDiceValue(int value) {
 	  if (value == 1) {
-		   System.out.println("critical miss!!!");
-		   setCriticalMiss(true);
-		   
-		  }
-		  if (value == 20) {
-		   System.out.println("critical hit!!!");
-		   setCriticalHit(true);
+	   System.out.println("critical miss!!!");
+	   setCriticalMiss(true);
 
-		  }
+	  }
+	  if (value == 20) {
+	   System.out.println("critical hit!!!");
+	   setCriticalHit(true);
 
-		  if (value + getDamageModifier() > getArmorClass()) {
-	
-		   System.out.println("you hit!!!");
-		   hitDamageLogic();
+	  }
 
-		  } 
-		  else {
-			   System.out.println("You missed!!");
-		
-		  }
-	 
- }
+	  if (value + getDamageModifier() > getArmorClass()) {
+
+	   System.out.println("you hit!!!");
+	   hitDamageLogic();
+
+	  } else {
+	   System.out.println("You missed!!");
+
+	  }
+
+	 }
 
  private void hitDamageLogic() {
 
   System.out.println("Enter number of dice");
-  setNumberOfDice(readInteger());
+  setNumberOfDice(readInteger(1,100));
 
   System.out.println("Enter number of sides");
-  setNumberOfSides(readInteger());
+  setNumberOfSides(readInteger(1, 100));
 
   Dice20Side multiDie = new Dice20Side(numberOfSides);
   int sum = 0;
@@ -98,8 +103,7 @@ public class DamageGame {
     multiDie.roll();
     sumCritical += multiDie.getValue();
    }
-   System.out.print("+ " + sumCritical);
-
+   System.out.print(" + " + sumCritical);
 
   }
 
@@ -137,20 +141,30 @@ public class DamageGame {
  public void setDamageModifier(int damageModifier) {
   this.damageModifier = damageModifier;
  }
- public int readInteger() {
+ public int readInteger(int min, int max) {
 
   String input = "0";
   int number = 0;
 
 
-  while (tryParseInt(input) && Integer.parseInt(input) < 101 && Integer.parseInt(input) > -101) {
+  while (number == 0) {
    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 
    try {
+	 
     input = reader.readLine();
-    number = Integer.parseInt(input);
-    return number;
+    if(tryParseInt(input)) {
+    
+    	   if(Integer.parseInt(input) > min - 1 && Integer.parseInt(input) < max + 1) {
+    		   number = Integer.parseInt(input);
+    	   	   return number;
+    		   
+    	   }
+    	
+    } 
+    System.out.println("Invalid Input!");
+
 
 
    } catch (IOException e) {
