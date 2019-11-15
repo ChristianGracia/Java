@@ -154,13 +154,10 @@ public class DamageGame {
    try {
 	 
     input = reader.readLine();
-    if(tryParseInt(input)) {
-    
-    	   if(Integer.parseInt(input) > min - 1 && Integer.parseInt(input) < max + 1) {
-    		   number = Integer.parseInt(input);
-    	   	   return number;
-    		   
-    	   }
+    if(tryParseInt(input) && (Integer.parseInt(input) > min - 1 && Integer.parseInt(input) < max + 1)) {
+
+    	number = Integer.parseInt(input);
+    	return number;
     	
     } 
     System.out.println("Invalid Input!");
