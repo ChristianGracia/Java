@@ -38,27 +38,34 @@ public class DamageGame {
   dice.roll();
 
   System.out.println(dice.getValue());
+ 
+  checkDiceValue(dice.getValue());
 
-  if (dice.getValue() == 1) {
-   System.out.println("critical miss!!!");
-   setCriticalMiss(true);
-  }
-  if (dice.getValue() == 20) {
-   System.out.println("critical hit!!!");
-   setCriticalHit(true);
+ }
+ 
+ private void checkDiceValue(int value) {
+	  if (value == 1) {
+		   System.out.println("critical miss!!!");
+		   setCriticalMiss(true);
+		   
+		  }
+		  if (value == 20) {
+		   System.out.println("critical hit!!!");
+		   setCriticalHit(true);
 
-  }
+		  }
 
-  if (dice.getValue() + getDamageModifier() <= getArmorClass()) {
-   System.out.println("You missed!!");
+		  if (value + getDamageModifier() > getArmorClass()) {
+	
+		   System.out.println("you hit!!!");
+		   hitDamageLogic();
 
-  } else {
-   System.out.println("you hit!!!");
-   hitDamageLogic();
-
-
-  }
-
+		  } 
+		  else {
+			   System.out.println("You missed!!");
+		
+		  }
+	 
  }
 
  private void hitDamageLogic() {
