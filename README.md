@@ -10,4 +10,8 @@ contains programs using:
 
 **docker**
 
-**sql db**
+**mysql**
+
+**jackson**
+
+**spring-boot**
