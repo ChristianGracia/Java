@@ -8,7 +8,9 @@ public class Deck {
 	
 	public Deck() {
 		this.setDeck(createDeck());	
-		Card[] temp = shuffleDeck(getDeck(), 51);
+		Card[] deck = shuffleDeck(getDeck(), 51);
+		
+		Card[] temp = dealHand(deck, 7);
 		
 		
 		for(Card item : temp) {
@@ -49,19 +51,29 @@ public class Deck {
 		return newDeck;
 		
 	}
-	private Card[] shuffleDeck(Card[] arr, int n) {
+	private Card[] shuffleDeck(Card[] deck, int length) {
         Random r = new Random(); 
 
-        for (int i = n-1; i > 0; i--) { 
+        for (int i = length-1; i > 0; i--) { 
 
             int j = r.nextInt(i+1);
 
-            Card temp = arr[i]; 
-            arr[i] = arr[j]; 
-            arr[j] = temp; 
+            Card temp = deck[i]; 
+            deck[i] = deck[j]; 
+            deck[j] = temp; 
         } 
 
-        return arr;
+        return deck;
+	}
+	private Card[] dealHand(Card[] deck, int count) {
+		Card[] handArray = new Card[count];
+		
+		for(int i = 0; i < count; i++) {
+			handArray[i] = deck[i];
+		}
+
+		return handArray;
+		
 	}
 
 }
