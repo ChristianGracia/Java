@@ -1,16 +1,24 @@
 package bestHand;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Deck {
 	private Card[] deck;
 	
 	public Deck() {
 		this.setDeck(createDeck());	
-		Card[] temp = getDeck();
+		Card[] temp = shuffleDeck(getDeck(), 51);
+		
 		
 		for(Card item : temp) {
-			System.out.println(item.getCardNumber());
+			System.out.print(item.getCardNumber());
+			System.out.print(" ");
+			System.out.print(item.getValue());
+			System.out.print(" ");
+			System.out.print(item.getSuit());
+			System.out.println(" ");
+			
 			
 		}
 	
@@ -40,6 +48,20 @@ public class Deck {
 	
 		return newDeck;
 		
+	}
+	private Card[] shuffleDeck(Card[] arr, int n) {
+        Random r = new Random(); 
+
+        for (int i = n-1; i > 0; i--) { 
+
+            int j = r.nextInt(i+1);
+
+            Card temp = arr[i]; 
+            arr[i] = arr[j]; 
+            arr[j] = temp; 
+        } 
+
+        return arr;
 	}
 
 }
