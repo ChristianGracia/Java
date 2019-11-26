@@ -20,7 +20,7 @@ public class Game {
         endGame(getPlayers());
 	}
 	private void endGame(Player[] players) {
-		 System.out.println("Out of cards! Game over!");
+		 System.out.println("\n\nOut of cards! Game over!");
 	        System.out.println("Score:");
 	        System.out.println(players[0].getName() + ": " + players[0].getScore());
 	        System.out.println(players[1].getName() + ": " + players[1].getScore());   
@@ -88,7 +88,8 @@ public class Game {
 		}
 		
 		String name = currentPlayer.getName();
-		System.out.println("\n\n" + name + "'s turn. Press enter to see your cards    CARDS LEFT: " + cardsLeft);
+		sayTurn(name, cardsLeft);
+
 		readConfirmInput();
 		System.out.println("\n");
 		checkForDoubles(currentPlayer);
@@ -125,19 +126,26 @@ public class Game {
 		   resolveCards(currentPlayer, otherPlayer, cardMatch, deck);
 		}
 		else {
-
 		
-			System.out.println(otherPlayer.getName() + " does not have any " + desiredCard +  "'s");
-			System.out.print("You go fish!   ");
-			deck.drawCard(currentPlayer);
-			System.out.println("\n\n")
 			checkForDoubles(currentPlayer);
-			setTurnCount();
+			goFish(currentPlayer, otherPlayer, deck, desiredCard);
 		}
 		
 
 	}
 	
+	private void goFish(Player currentPlayer, Player otherPlayer, Deck deck, int desiredCard) {
+		System.out.println(otherPlayer.getName() + " does not have any " + desiredCard +  "'s");
+		System.out.print("You go fish!   ");
+		deck.drawCard(currentPlayer);
+		System.out.println("\n\n");
+		checkForDoubles(currentPlayer);
+		setTurnCount();
+	}
+	private void sayTurn(String name, int cardsLeft) {
+		System.out.println("\n\n" + name + "'s turn. Press enter to see your cards    CARDS LEFT: " + cardsLeft);
+		
+	}
 	private  void resolveCards(Player currentPlayer, Player otherPlayer, Card cardMatch, Deck deck) {
 		
 		System.out.println(otherPlayer.getName() + " has a " + cardMatch.getValue() + " " + cardMatch.getSuit() + " for you!");
