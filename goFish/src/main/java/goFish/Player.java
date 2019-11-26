@@ -27,7 +27,7 @@ public class Player {
 	}
 
 	public void setScore(int score) {
-		this.score = score;
+		this.score = this.score + score;
 	}
 
 	public ArrayList<Card> getCards() {

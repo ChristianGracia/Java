@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class Game {
 	
@@ -13,14 +13,29 @@ public class Game {
 	
 	public Game() {
 		Deck deck = new Deck();
-	    setPlayers(new Player[] { new Player("player 1", deck.dealHand(deck.getDeck(), 5)), new Player("player 2", deck.dealHand(deck.getDeck(), 5))}) ;
+	    setPlayers(new Player[] { new Player("Joe", deck.dealHand(deck.getDeck(), 5)), new Player("Dan", deck.dealHand(deck.getDeck(), 5))}) ;
         while(deck.getDeck().size() != 0) {
-        	startTurn(getPlayers());
+        	startTurn(getPlayers(), deck);
         }
+        System.out.println("Out of cards! Game over!");
+        System.out.println("Score:");
+        System.out.println(getPlayers()[0].getName() + ": " + getPlayers()[0].getScore());
+        System.out.println(getPlayers()[1].getName() + ": " + getPlayers()[1].getScore());
+        
 
 	}
+	
+	private boolean checkIfUserHasCard(int cardValue, Player player) {
+		for (Card card : player.getCards()) {
+			if (card.getValue() == cardValue) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-	private void startTurn(Player[] players) {
+	private void startTurn(Player[] players, Deck deck) {
+		int cardsLeft = deck.getDeck().size();
 		int turn = getTurnCount() % 2;
 		Player currentPlayer = players[turn];
 		Player otherPlayer;
@@ -32,35 +47,50 @@ public class Game {
 		}
 		
 		String name = currentPlayer.getName();
-		System.out.println(name + "'s turn. Press enter to see your cards");
+		System.out.println(name + "'s turn. Press enter to see your cards    CARDS LEFT: " + cardsLeft);
 		readConfirmInput();
 		for(Card card : currentPlayer.getCards()) {
 			System.out.print(card.getValue() + " " +  card.getSuit() + "     ");
 		}
 		System.out.println("\n");
-		System.out.println("Enter what card you want hope to find: 2-10 J Q K A");
-		int desiredCard = getDesiredCard();
-		System.out.println(desiredCard);
+		
+		Card cardMatch = null;
 		
 
+		System.out.println(name + ", what card you want hope to find: 2-10 J Q K A");
+		int desiredCard = getDesiredCard();
+		
 	
 		for(Card card : otherPlayer.getCards()) {
-			System.out.print(card.getValue() + " " +  card.getSuit() + "     ");
-			
 			if(card.getValue() == desiredCard) {
-				System.out.println(otherPlayer.getName() + " has a " + card.getValue() + " " + card.getSuit() + " for you!");
-				    ArrayList<Card> tempOtherPlayerHand = otherPlayer.getCards();
-				    tempOtherPlayerHand.remove(card);
-				    
-				    ArrayList<Card> currentPlayerHand = currentPlayer.getCards();
-				    currentPlayerHand.remove(card);
-				    currentPlayer.setCards(currentPlayerHand);
-				 
+				cardMatch = card;
+
 			}
 		}
 		
-		
-		setTurnCount();
+		if(cardMatch != null) {
+			System.out.println(otherPlayer.getName() + " has a " + cardMatch.getValue() + " " + cardMatch.getSuit() + " for you!");
+		    
+		    ArrayList<Card> otherPlayerHand = otherPlayer.getCards();
+		    otherPlayerHand.remove(cardMatch);
+		    otherPlayer.setCards(otherPlayerHand); 
+		    
+		    ArrayList<Card> currentPlayerHand = currentPlayer.getCards();
+		    currentPlayerHand.remove(cardMatch);
+		    currentPlayer.setCards(currentPlayerHand); 
+		    currentPlayer.setScore(1);
+		    System.out.println("+1 points to " + name);
+		    System.out.println("Current score for " + name + " " + currentPlayer.getScore());
+
+			deck.drawCard(currentPlayer);
+			System.out.println("\n\n\n\n");
+
+		}
+		else {
+
+			setTurnCount();
+			System.out.println(otherPlayer.getName() + " does not have any " + desiredCard +  "'s \n\n\n\n");
+		}
 
 	}
 

@@ -48,6 +48,17 @@ public class Deck {
 		return handList;
 		
 	}
+	 public void drawCard(Player player) {
+		 
+		 ArrayList<Card> deck = getDeck();
+		 Card newCard = deck.remove(0);
+		 setDeck(deck);
+		 
+		 ArrayList<Card> currentCards = player.getCards();
+		 currentCards.add(newCard);
+		 player.setCards(currentCards);
+		 System.out.println("You drew a " + newCard.getValue() + " " + newCard.getSuit());
+	 }
 
 	public ArrayList<Card> getDeck() {
 		return deck;
