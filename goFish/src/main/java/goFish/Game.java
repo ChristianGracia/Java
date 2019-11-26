@@ -19,11 +19,33 @@ public class Game {
 	private void startTurn(Player player) {
 		String name = player.getName();
 		System.out.println(name + "'s turn. Press enter to see your cards");
-		while(!readConfirmInput());
+		readConfirmInput();
 		for(Card card : player.getCards()) {
 			System.out.print(card.getValue() + " " +  card.getSuit() + "     ");
 		}
 		System.out.println("\n");
+		System.out.println("Enter what card you want hope to find: 2-10 J Q K A");
+
+		String desiredCard = readConfirmInput();
+		if(desiredCard.toLowerCase() == "j") {
+			desiredCard = "11";
+		}
+		else if (desiredCard.toLowerCase() == "q") {
+			desiredCard = "12";
+		}
+		else if (desiredCard.toLowerCase() == "k") {
+			desiredCard = "13";
+		}
+		else if (desiredCard.toLowerCase() == "a") {
+			desiredCard = "1";
+		}
+		
+		
+
+	
+		
+			
+		
 
 	}
 
@@ -35,7 +57,7 @@ public class Game {
 		this.turnCount = this.turnCount + 1;
 	}
 	
-	private boolean readConfirmInput() {
+	private String readConfirmInput() {
 
 		  String input = null;
 		  while (input == null) {
@@ -45,7 +67,7 @@ public class Game {
 			 
 		    input = reader.readLine();
 	
-		    	return true;
+		    	return input;
 		    } 
 
 		   catch (IOException e) {
@@ -54,15 +76,10 @@ public class Game {
 		   }
 
 		 }
-		  return true;
+		  return input;
 	}
-//		 private boolean tryParseInt(String value) {
-//		  try {
-//		   Integer.parseInt(value);
-//		   return true;
-//		  } catch (NumberFormatException e) {
-//		   return false;
-//		  }
-//		 }
+	
+	 
+
 }
 
