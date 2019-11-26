@@ -1,29 +1,13 @@
 package goFish;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Random;
 
 public class Deck {
 	private ArrayList<Card> deck;
 	
 	public Deck() {
 		setDeck(createDeck());
-		
-
-
-		
-		for(Card item : getDeck()) {
-			System.out.print(item.getCardNumber());
-			System.out.print(" ");
-			System.out.print(item.getValue());
-			System.out.print(" ");
-			System.out.print(item.getSuit());
-			System.out.println(" ");
-
-		}
-	
 	}
 
 	private ArrayList<Card> createDeck() {
@@ -49,7 +33,7 @@ public class Deck {
 		return cards;
 	}
 
-	private ArrayList<Card> dealHand(ArrayList<Card> cards, int count) {
+	 public ArrayList<Card> dealHand(ArrayList<Card> cards, int count) {
 		ArrayList<Card> handList = new ArrayList<Card>();
 		
 		for(int i = 0; i < count; i++) {
