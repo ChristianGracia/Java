@@ -44,8 +44,9 @@ public class Game {
 	
 	private void resolveDoubles(Player player, int value) {
 		ArrayList<Card> playerHand = player.getCards();
-	    playerHand.removeIf(card -> card.getValue() == 10);
-		System.out.println("double found!" + " " + value + "'s");
+	    playerHand.removeIf(card -> card.getValue() == value);
+		System.out.println("Double found!" + " " + value + "'s");
+		player.setScore(1);
 		System.out.println("Current score for " + player.getName()+ " " + player.getScore());
 		
 	}
@@ -56,27 +57,24 @@ public class Game {
 				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	private void startTurn(Player[] players, Deck deck) {
 		int cardsLeft = deck.getDeck().size();
 		int turn = getTurnCount() % 2;
 		Player currentPlayer = players[turn];
-		Player otherPlayer;
-		if(turn == 0) {
-			otherPlayer = players[1];
-		}
-		else {
-			otherPlayer = players[0];
-		}
-		
+		Player otherPlayer = turn == 0 ? players[1]:players[0];
+
+	
 		if(currentPlayer.getCards().size() == 0) {
-			deck.drawCard(currentPlayer);
-			deck.drawCard(currentPlayer);
-			checkForDoubles(currentPlayer);
-			deck.drawCard(currentPlayer);
-			checkForDoubles(currentPlayer);
+			
+			for(int i = 0; i < 3; i++) {
+				deck.drawCard(currentPlayer);
+				if(i > 1) {
+					checkForDoubles(currentPlayer);
+				}
+			}
 		}
 		
 		String name = currentPlayer.getName();
@@ -127,6 +125,8 @@ public class Game {
 	private  void resolveCards(Player currentPlayer, Player otherPlayer, Card cardMatch, Deck deck) {
 		
 		System.out.println(otherPlayer.getName() + " has a " + cardMatch.getValue() + " " + cardMatch.getSuit() + " for you!");
+		
+		if (checkIfUserHasCard(cardMatch.getValue(), currentPlayer)) {
 	    
 	    ArrayList<Card> otherPlayerHand = otherPlayer.getCards();
 	    otherPlayerHand.remove(cardMatch);
@@ -142,6 +142,10 @@ public class Game {
 		deck.drawCard(currentPlayer);
 		checkForDoubles(currentPlayer);
 		System.out.println("\n\n\n\n");
+		}
+		else {
+			System.out.println("too bad you don't have that card!");
+		}
 	}
 
 	public int getTurnCount() {
