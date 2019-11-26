@@ -33,7 +33,7 @@ public class Deck {
 		return cards;
 	}
 
-	 public ArrayList<Card> dealHand(ArrayList<Card> cards, int count) {
+	 protected ArrayList<Card> dealHand(ArrayList<Card> cards, int count) {
 		ArrayList<Card> handList = new ArrayList<Card>();
 		
 		for(int i = 0; i < count; i++) {
