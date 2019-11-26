@@ -25,7 +25,10 @@ public class Game {
 		}
 		System.out.println("\n");
 		System.out.println("Enter what card you want hope to find: 2-10 J Q K A");
+		
+		boolean check = false;
 
+		while(!check) {
 		String desiredCard = readConfirmInput();
 		if(desiredCard.toLowerCase() == "j") {
 			desiredCard = "11";
@@ -39,12 +42,10 @@ public class Game {
 		else if (desiredCard.toLowerCase() == "a") {
 			desiredCard = "1";
 		}
-		
-		
-
-	
-		
-			
+		if(tryParseInt(desiredCard) && Integer.parseInt(desiredCard) > 0 && Integer.parseInt(desiredCard) < 15) {
+			check = true;
+		}
+		}
 		
 
 	}
@@ -79,7 +80,15 @@ public class Game {
 		  return input;
 	}
 	
-	 
+	 private boolean tryParseInt(String value) {
+		  try {
+		   Integer.parseInt(value);
+		   return true;
+		  } catch (NumberFormatException e) {
+		   return false;
+		  }
+		 }
+	
 
 }
 
