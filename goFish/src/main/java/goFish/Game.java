@@ -25,13 +25,38 @@ public class Game {
 
 	}
 	
+	private void checkForDoubles(Player player) {
+
+		int[] arr = new int[15];
+		
+		for(Card card : player.getCards()) {
+			arr[card.getValue()]++;
+		}
+		
+		for(int j = 0; j < arr.length; j++) {
+			
+			if(arr[j] == 2) {
+				resolveDoubles(player, j);
+			}
+		}
+		
+	}
+	
+	private void resolveDoubles(Player player, int value) {
+		ArrayList<Card> playerHand = player.getCards();
+	    playerHand.removeIf(card -> card.getValue() == 10);
+		System.out.println("double found!" + " " + value + "'s");
+		System.out.println("Current score for " + player.getName()+ " " + player.getScore());
+		
+	}
+	
 	private boolean checkIfUserHasCard(int cardValue, Player player) {
 		for (Card card : player.getCards()) {
 			if (card.getValue() == cardValue) {
 				return true;
 			}
 		}
-		return false;
+		return true;
 	}
 
 	private void startTurn(Player[] players, Deck deck) {
@@ -46,10 +71,19 @@ public class Game {
 			otherPlayer = players[0];
 		}
 		
+		if(currentPlayer.getCards().size() == 0) {
+			deck.drawCard(currentPlayer);
+			deck.drawCard(currentPlayer);
+			checkForDoubles(currentPlayer);
+			deck.drawCard(currentPlayer);
+			checkForDoubles(currentPlayer);
+		}
+		
 		String name = currentPlayer.getName();
 		System.out.println(name + "'s turn. Press enter to see your cards    CARDS LEFT: " + cardsLeft);
 		readConfirmInput();
 		System.out.println("\n");
+		checkForDoubles(currentPlayer);
 		
 		Card cardMatch = null;
 		boolean cardHaveCheck = false;
@@ -60,7 +94,7 @@ public class Game {
 			for(Card card : currentPlayer.getCards()) {
 				System.out.print(card.getValue() + " " +  card.getSuit() + "     ");
 			}
-		System.out.println(name + ", what card you want hope to find: 2-10 J Q K A");
+		System.out.println(name + ", what card do you hope to find: 2-10 J Q K A");
 		 desiredCard = getDesiredCard();
 		if(checkIfUserHasCard(desiredCard, currentPlayer)) {
 			cardHaveCheck = true;
@@ -106,6 +140,7 @@ public class Game {
 	    System.out.println("Current score for " + currentPlayer.getName()+ " " + currentPlayer.getScore());
 
 		deck.drawCard(currentPlayer);
+		checkForDoubles(currentPlayer);
 		System.out.println("\n\n\n\n");
 	}
 
