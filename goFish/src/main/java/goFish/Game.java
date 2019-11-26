@@ -49,16 +49,26 @@ public class Game {
 		String name = currentPlayer.getName();
 		System.out.println(name + "'s turn. Press enter to see your cards    CARDS LEFT: " + cardsLeft);
 		readConfirmInput();
-		for(Card card : currentPlayer.getCards()) {
-			System.out.print(card.getValue() + " " +  card.getSuit() + "     ");
-		}
 		System.out.println("\n");
 		
 		Card cardMatch = null;
-		
+		boolean cardHaveCheck = false;
+		int desiredCard = 0;
 
+		while(!cardHaveCheck) {
+			
+			for(Card card : currentPlayer.getCards()) {
+				System.out.print(card.getValue() + " " +  card.getSuit() + "     ");
+			}
 		System.out.println(name + ", what card you want hope to find: 2-10 J Q K A");
-		int desiredCard = getDesiredCard();
+		 desiredCard = getDesiredCard();
+		if(checkIfUserHasCard(desiredCard, currentPlayer)) {
+			cardHaveCheck = true;
+		   }
+		else {
+			System.out.println("You dont have that card!");
+		}
+		}
 		
 	
 		for(Card card : otherPlayer.getCards()) {
@@ -69,22 +79,8 @@ public class Game {
 		}
 		
 		if(cardMatch != null) {
-			System.out.println(otherPlayer.getName() + " has a " + cardMatch.getValue() + " " + cardMatch.getSuit() + " for you!");
-		    
-		    ArrayList<Card> otherPlayerHand = otherPlayer.getCards();
-		    otherPlayerHand.remove(cardMatch);
-		    otherPlayer.setCards(otherPlayerHand); 
-		    
-		    ArrayList<Card> currentPlayerHand = currentPlayer.getCards();
-		    currentPlayerHand.remove(cardMatch);
-		    currentPlayer.setCards(currentPlayerHand); 
-		    currentPlayer.setScore(1);
-		    System.out.println("+1 points to " + name);
-		    System.out.println("Current score for " + name + " " + currentPlayer.getScore());
 
-			deck.drawCard(currentPlayer);
-			System.out.println("\n\n\n\n");
-
+		   resolveCards(currentPlayer, otherPlayer, cardMatch, deck);
 		}
 		else {
 
@@ -92,6 +88,25 @@ public class Game {
 			System.out.println(otherPlayer.getName() + " does not have any " + desiredCard +  "'s \n\n\n\n");
 		}
 
+	}
+	
+	private  void resolveCards(Player currentPlayer, Player otherPlayer, Card cardMatch, Deck deck) {
+		
+		System.out.println(otherPlayer.getName() + " has a " + cardMatch.getValue() + " " + cardMatch.getSuit() + " for you!");
+	    
+	    ArrayList<Card> otherPlayerHand = otherPlayer.getCards();
+	    otherPlayerHand.remove(cardMatch);
+	    otherPlayer.setCards(otherPlayerHand); 
+	    
+	    ArrayList<Card> currentPlayerHand = currentPlayer.getCards();
+	    currentPlayerHand.remove(cardMatch);
+	    currentPlayer.setCards(currentPlayerHand); 
+	    currentPlayer.setScore(1);
+	    System.out.println("+1 points to " + currentPlayer.getName());
+	    System.out.println("Current score for " + currentPlayer.getName()+ " " + currentPlayer.getScore());
+
+		deck.drawCard(currentPlayer);
+		System.out.println("\n\n\n\n");
 	}
 
 	public int getTurnCount() {
@@ -153,7 +168,7 @@ public class Game {
 				else if (desiredCard.charAt(0) == 'a') {
 					desiredCard = "1";
 				}
-				if(tryParseInt(desiredCard) && Integer.parseInt(desiredCard) > 0 && Integer.parseInt(desiredCard) < 15) {
+				if(tryParseInt(desiredCard) && Integer.parseInt(desiredCard) > 0 && Integer.parseInt(desiredCard) < 15 ) {
 					desiredIndex = Integer.parseInt(desiredCard);
 					break;
 				}
