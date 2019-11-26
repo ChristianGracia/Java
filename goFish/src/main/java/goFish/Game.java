@@ -3,6 +3,7 @@ package goFish;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Game {
@@ -42,15 +43,24 @@ public class Game {
 		System.out.println(desiredCard);
 		
 
-//		
+	
 		for(Card card : otherPlayer.getCards()) {
 			System.out.print(card.getValue() + " " +  card.getSuit() + "     ");
+			
+			if(card.getValue() == desiredCard) {
+				System.out.println(otherPlayer.getName() + " has a " + card.getValue() + " " + card.getSuit() + " for you!");
+				    ArrayList<Card> tempOtherPlayerHand = otherPlayer.getCards();
+				    tempOtherPlayerHand.remove(card);
+				    
+				    ArrayList<Card> currentPlayerHand = currentPlayer.getCards();
+				    currentPlayerHand.remove(card);
+				    currentPlayer.setCards(currentPlayerHand);
+				 
+			}
 		}
 		
-		setTurnCount();
-
-//		setTurnCount();
 		
+		setTurnCount();
 
 	}
 
