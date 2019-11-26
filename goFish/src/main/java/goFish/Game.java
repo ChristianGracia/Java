@@ -17,12 +17,13 @@ public class Game {
         while(deck.getDeck().size() != 0) {
         	startTurn(getPlayers(), deck);
         }
-        System.out.println("Out of cards! Game over!");
-        System.out.println("Score:");
-        System.out.println(getPlayers()[0].getName() + ": " + getPlayers()[0].getScore());
-        System.out.println(getPlayers()[1].getName() + ": " + getPlayers()[1].getScore());
-        
-
+        endGame(getPlayers());
+	}
+	private void endGame(Player[] players) {
+		 System.out.println("Out of cards! Game over!");
+	        System.out.println("Score:");
+	        System.out.println(players[0].getName() + ": " + players[0].getScore());
+	        System.out.println(players[1].getName() + ": " + players[1].getScore());   
 	}
 	
 	private void checkForDoubles(Player player) {
@@ -45,6 +46,7 @@ public class Game {
 	private void resolveDoubles(Player player, int value) {
 		ArrayList<Card> playerHand = player.getCards();
 	    playerHand.removeIf(card -> card.getValue() == value);
+	    player.setCards(playerHand);
 		System.out.println("Double found!" + " " + value + "'s");
 		player.setScore(1);
 		System.out.println("Current score for " + player.getName()+ " " + player.getScore());
@@ -58,6 +60,14 @@ public class Game {
 			}
 		}
 		return false;
+	}
+	
+	private void showCards(Player player) {
+		System.out.println("Your cards:");
+		for(Card card : player.getCards()) {
+			System.out.print(card.getValue() + " " +  card.getSuit() + "     ");
+		}
+		
 	}
 
 	private void startTurn(Player[] players, Deck deck) {
@@ -78,7 +88,7 @@ public class Game {
 		}
 		
 		String name = currentPlayer.getName();
-		System.out.println(name + "'s turn. Press enter to see your cards    CARDS LEFT: " + cardsLeft);
+		System.out.println("\n\n" + name + "'s turn. Press enter to see your cards    CARDS LEFT: " + cardsLeft);
 		readConfirmInput();
 		System.out.println("\n");
 		checkForDoubles(currentPlayer);
@@ -89,9 +99,9 @@ public class Game {
 
 		while(!cardHaveCheck) {
 			
-			for(Card card : currentPlayer.getCards()) {
-				System.out.print(card.getValue() + " " +  card.getSuit() + "     ");
-			}
+			showCards(currentPlayer);
+			
+			
 		System.out.println(name + ", what card do you hope to find: 2-10 J Q K A");
 		 desiredCard = getDesiredCard();
 		if(checkIfUserHasCard(desiredCard, currentPlayer)) {
@@ -116,9 +126,15 @@ public class Game {
 		}
 		else {
 
+		
+			System.out.println(otherPlayer.getName() + " does not have any " + desiredCard +  "'s");
+			System.out.print("You go fish!   ");
+			deck.drawCard(currentPlayer);
+			System.out.println("\n\n")
+			checkForDoubles(currentPlayer);
 			setTurnCount();
-			System.out.println(otherPlayer.getName() + " does not have any " + desiredCard +  "'s \n\n\n\n");
 		}
+		
 
 	}
 	
@@ -129,22 +145,22 @@ public class Game {
 		if (checkIfUserHasCard(cardMatch.getValue(), currentPlayer)) {
 	    
 	    ArrayList<Card> otherPlayerHand = otherPlayer.getCards();
-	    otherPlayerHand.remove(cardMatch);
+	    otherPlayerHand.removeIf(card -> card.getValue() == cardMatch.getValue());
 	    otherPlayer.setCards(otherPlayerHand); 
 	    
 	    ArrayList<Card> currentPlayerHand = currentPlayer.getCards();
-	    currentPlayerHand.remove(cardMatch);
+	    currentPlayerHand.removeIf(card -> card.getValue() == cardMatch.getValue());
 	    currentPlayer.setCards(currentPlayerHand); 
 	    currentPlayer.setScore(1);
 	    System.out.println("+1 points to " + currentPlayer.getName());
 	    System.out.println("Current score for " + currentPlayer.getName()+ " " + currentPlayer.getScore());
 
-		deck.drawCard(currentPlayer);
-		checkForDoubles(currentPlayer);
-		System.out.println("\n\n\n\n");
+	
+		System.out.println("\n\n");
 		}
 		else {
 			System.out.println("too bad you don't have that card!");
+			
 		}
 	}
 
@@ -158,8 +174,8 @@ public class Game {
 	
 	private String readConfirmInput() {
 
-		  String input = null;
-		  while (input == null) {
+		  String input = "";
+		  while (input == "") {
 		   BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 		   try {
