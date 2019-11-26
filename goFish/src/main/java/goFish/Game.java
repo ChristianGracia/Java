@@ -7,13 +7,16 @@ import java.util.Arrays;
 
 public class Game {
 	
-	private int turnCount;
+	private int turnCount = 1;
+	private Player[] players = new Player[2];
 	
 	public Game() {
 		Deck deck = new Deck();
-		Player player1 = new Player("player 1", deck.dealHand(deck.getDeck(), 5));
-		Player player2 =  new Player("player 2", deck.dealHand(deck.getDeck(), 5)); 
-		startTurn(player1);
+	    setPlayers(new Player[] { new Player("player 1", deck.dealHand(deck.getDeck(), 5)), new Player("player 2", deck.dealHand(deck.getDeck(), 5))}) ;
+        while(deck.getDeck().size() != 0) {
+        	startTurn(getPlayers()[getTurnCount() % 2]);
+        }
+
 	}
 
 	private void startTurn(Player player) {
@@ -25,27 +28,9 @@ public class Game {
 		}
 		System.out.println("\n");
 		System.out.println("Enter what card you want hope to find: 2-10 J Q K A");
-		
-		boolean check = false;
-
-		while(!check) {
-		String desiredCard = readConfirmInput();
-		if(desiredCard.toLowerCase() == "j") {
-			desiredCard = "11";
-		}
-		else if (desiredCard.toLowerCase() == "q") {
-			desiredCard = "12";
-		}
-		else if (desiredCard.toLowerCase() == "k") {
-			desiredCard = "13";
-		}
-		else if (desiredCard.toLowerCase() == "a") {
-			desiredCard = "1";
-		}
-		if(tryParseInt(desiredCard) && Integer.parseInt(desiredCard) > 0 && Integer.parseInt(desiredCard) < 15) {
-			check = true;
-		}
-		}
+		int desiredCard = getDesiredCard();
+		System.out.println(desiredCard);
+		setTurnCount();
 		
 
 	}
@@ -88,7 +73,39 @@ public class Game {
 		   return false;
 		  }
 		 }
+	 
+	 private int getDesiredCard() {
+
+			String desiredCard = readConfirmInput().toLowerCase();
+			if(desiredCard.charAt(0) == 'j') {
+				desiredCard = "11";
+			}
+			else if (desiredCard.charAt(0) == 'q') {
+				desiredCard = "12";
+			}
+			else if (desiredCard.charAt(0) == 'k') {
+				desiredCard = "13";
+			}
+			else if (desiredCard.charAt(0) == 'a') {
+				desiredCard = "1";
+			}
+			if(tryParseInt(desiredCard) && Integer.parseInt(desiredCard) > 0 && Integer.parseInt(desiredCard) < 15) {
+				return Integer.parseInt(desiredCard);
+			}
+			else {
+				return 0;
+			
+			}
 	
+	 }
+
+	public Player[] getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(Player[] players) {
+		this.players = players;
+	}
 
 }
 
