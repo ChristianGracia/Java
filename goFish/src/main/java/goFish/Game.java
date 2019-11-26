@@ -31,8 +31,10 @@ public class Game {
 		System.out.println(name + "'s turn. Press enter to see your cards");
 		while(!readConfirmInput());
 		for(Card card : player.getCards()) {
-			
+			System.out.print(card.getValue() + " " +  card.getSuit() + "     ");
 		}
+		System.out.println("\n");
+		
 		
 
 	}

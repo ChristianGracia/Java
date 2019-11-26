@@ -5,6 +5,7 @@ import java.util.Collections;
 
 public class Deck {
 	private ArrayList<Card> deck;
+	private String[] suitArray = new String[] {"\u2665", "\u2663", "\u2666", "\u2660"};
 	
 	public Deck() {
 		setDeck(createDeck());
@@ -13,6 +14,7 @@ public class Deck {
 	private ArrayList<Card> createDeck() {
 		
 	   Card[] temp = new Card[52];
+	   String[] suitArr =  getSuitArray();
 		
 		for(int i = 1, j = 0, k=0; k < 52 ; i++, j++, k++ ) {
 			if(j % 4 == 0) {
@@ -21,7 +23,7 @@ public class Deck {
 			if(i % 14 == 0) {
 				i = 1;
 			}
-			temp[k] = new Card(i, j, k);
+			temp[k] = new Card(i, suitArr[j], k);
 		}
 		ArrayList<Card> cards = new ArrayList<Card>();
 		
@@ -33,7 +35,7 @@ public class Deck {
 		return cards;
 	}
 
-	 protected ArrayList<Card> dealHand(ArrayList<Card> cards, int count) {
+	 public ArrayList<Card> dealHand(ArrayList<Card> cards, int count) {
 		ArrayList<Card> handList = new ArrayList<Card>();
 		
 		for(int i = 0; i < count; i++) {
@@ -54,5 +56,10 @@ public class Deck {
 	public void setDeck(ArrayList<Card> deck) {
 		this.deck = deck;
 	}
+
+	public String[] getSuitArray() {
+		return suitArray;
+	}
+
 
 }
