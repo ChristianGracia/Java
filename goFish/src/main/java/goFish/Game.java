@@ -86,7 +86,7 @@ public class Game {
   sayTurn(name, cardsLeft);
 
   readConfirmInput();
-  System.out.println("\n");
+
   checkForDoubles(currentPlayer);
 
   gameLogic(deck, currentPlayer, otherPlayer, name);
@@ -113,7 +113,7 @@ public class Game {
   }
 
 
-  for (Card card: otherPlayer.getCards()) {
+  for (Card card : otherPlayer.getCards()) {
    if (card.getValue() == desiredCard) {
     cardMatch = card;
    }
@@ -222,25 +222,36 @@ public class Game {
 
    String desiredCard = readConfirmInput().toLowerCase();
    if (desiredCard.length() > 0) {
-    if (desiredCard.charAt(0) == 'j') {
-     desiredCard = "11";
-    } else if (desiredCard.charAt(0) == 'q') {
-     desiredCard = "12";
-    } else if (desiredCard.charAt(0) == 'k') {
-     desiredCard = "13";
-    } else if (desiredCard.charAt(0) == 'a') {
-     desiredCard = "1";
-    }
+    desiredCard = faceCardConverter(desiredCard);
+    
     if (tryParseInt(desiredCard) && Integer.parseInt(desiredCard) > 0 && Integer.parseInt(desiredCard) < 15) {
      desiredIndex = Integer.parseInt(desiredCard);
      break;
     }
    }
-
   }
   return desiredIndex;
 
  }
+private String faceCardConverter(String desiredCard) {
+	switch (desiredCard.charAt(0)) {
+    case 'j':
+     desiredCard = "11";
+     break;
+    case 'q':
+     desiredCard = "12";
+     break;
+    case 'k':
+     desiredCard = "13";
+     break;
+    case 'a':
+     desiredCard = "1";
+     break;
+    default:
+    	break;
+   }
+	return desiredCard;
+}
 
  public Player[] getPlayers() {
   return players;
