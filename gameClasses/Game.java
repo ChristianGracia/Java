@@ -14,9 +14,6 @@ public class Game {
   setPlayers(new Player[] {
    new Player("Joe", deck.dealHand(deck.getDeck(), 5)), new Player("Dan", deck.dealHand(deck.getDeck(), 5))
   });
-  while (deck.getDeck().size() != 0) {
-   startTurn(getPlayers(), deck);
-  }
   endGame(getPlayers());
  }
  private void endGame(Player[] players) {
