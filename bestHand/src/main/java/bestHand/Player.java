@@ -1,4 +1,4 @@
-package goFish;
+package bestHand;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,6 @@ public class Player {
 	public Player(String name, ArrayList<Card> cards)	{
 		setName(name);
 		setCards(cards);
-	
 	}
 
 	public String getName() {
