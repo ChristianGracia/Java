@@ -10,7 +10,7 @@ public class Deck {
 		this.setDeck(createDeck());	
 		Card[] deck = shuffleDeck(getDeck(), 51);
 		
-		Card[] temp = dealHand(deck, 7);
+		Card[] temp = dealHand(deck, 8);
 		
 		
 		for(Card item : temp) {
