@@ -1,10 +1,13 @@
 package bestHand;
 import java.util.ArrayList;
 
+
 public class Game {
 	
 	private int roundCount = 0;
 	private Player[] players = new Player[4];
+	public static final String ANSI_RESET = "\033[0m";;
+	public static final String ANSI_RED = "\033[0;31m";
 	
 	public Game() {
 		Deck deck = new Deck();
@@ -23,8 +26,13 @@ public class Game {
 	 private void showCards(Player player) {
 		  System.out.println("Your cards:");
 		  for (Card card: player.getCards()) {
-		   System.out.print(card.getValue() + " " + card.getSuit() + "     ");
+		
+		   System.out.print(card.getValue() + " " + card.getSuit() + "      ");
+
+
 		  }
+		  
+	
 
 		 }
 
