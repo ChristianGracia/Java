@@ -1,4 +1,5 @@
 package bestHand;
+import java.util.ArrayList;
 
 public class Game {
 	
@@ -8,15 +9,24 @@ public class Game {
 	public Game() {
 		Deck deck = new Deck();
 		  setPlayers(new Player[] {
-				   new Player("Joe", deck.dealHand(deck.getDeck(), 5)), new Player("Dan", deck.dealHand(deck.getDeck(), 5)),   new Player("Cliff", deck.dealHand(deck.getDeck(), 5)),   new Player("Mark", deck.dealHand(deck.getDeck(), 5))
+				   new Player("Joe", deck.dealHand(deck.getDeck(), 8)), new Player("Dan", deck.dealHand(deck.getDeck(), 8)),   new Player("Cliff", deck.dealHand(deck.getDeck(), 8)),   new Player("Mark", deck.dealHand(deck.getDeck(), 8))
 				  });
 		  for(Player player : getPlayers()) {
-			  for(Card item : player.getCards()) {
-				  System.out.print(item.getSuit() + " " + item.() + " ");
-			  }
-			  System.out.println("\n\n");
+			  System.out.println(player.getName());
+		      showCards(player);
+			  System.out.println("\n");
 		  }
+		  
+		  System.out.println(deck.getDeck().size() + " cards left.");
 	}
+	
+	 private void showCards(Player player) {
+		  System.out.println("Your cards:");
+		  for (Card card: player.getCards()) {
+		   System.out.print(card.getValue() + " " + card.getSuit() + "     ");
+		  }
+
+		 }
 
 	public int getRoundCount() {
 		return roundCount;
