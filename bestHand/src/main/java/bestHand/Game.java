@@ -25,9 +25,10 @@ public class Game {
 	
 	 private void showCards(Player player) {
 		  System.out.println("Your cards:");
+		  int counter = 0;
 		  for (Card card: player.getCards()) {
 		
-		   System.out.print(card.getValue() + " " + card.getSuit() + "      ");
+		   System.out.print( "["  +card.getValue() + " " + card.getSuit() + "] #" + ++counter + "     ");
 
 
 		  }
