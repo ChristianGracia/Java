@@ -22,7 +22,14 @@ public class Game {
 		  
 		  System.out.println(deck.getDeck().size() + " cards left.");
 		  
-		  System.out.println("Enter the number of each card you want to exchange");
+		  System.out.println("Enter the numbers of each card you want to exchange. Ex: 1 4 6 7 9");
+		  String[] desiredCard = readConfirmInput().split(" ");
+		  
+		  for(String item : desiredCard) {
+			  System.out.println(item);
+		  }
+		  
+		
 	}
 	
 	 private void showCards(Player player) {
