@@ -24,14 +24,7 @@ private void gameLogic() {
 		int counter = 0;
 	    while (counter < 4) {
 	
-	    int turn = counter;
-	    Player currentPlayer = players[turn];
-	    System.out.println("Player " + (counter + 1)+ ": " + currentPlayer.getName() + "    Round #" + (getRoundCount() + 1));
-	    System.out.println("Press enter to see your cards....");
-	    readConfirmInput();
-	    showCards(currentPlayer);
-	    System.out.println("\nEnter the numbers of each card you want to exchange. Ex: 1 4 6 7 8");
-	    System.out.println("You can exchange 0, 1, 2, 3, 5, or 8 cards. exchanges > 2 require a facecard in the exchange");
+	    startTurn(counter);
 	
 	    String[] desiredCard = readConfirmInput().split(" ");
 	    
@@ -47,11 +40,22 @@ private void gameLogic() {
 	  }
 }
 
+private void startTurn(int counter) {
+	int turn = counter;
+	Player currentPlayer = players[turn];
+	System.out.println("Player " + (counter + 1)+ ": " + currentPlayer.getName() + "    Round #" + (getRoundCount() + 1));
+	System.out.println("Press enter to see your cards....");
+	readConfirmInput();
+	showCards(currentPlayer);
+	System.out.println("\nEnter the numbers of each card you want to exchange. Ex: 1 4 6 7 8");
+	System.out.println("You can exchange 0, 1, 2, 3, 5, or 8 cards. exchanges > 2 require a facecard in the exchange");
+}
+
 private void inputValidator(String[] desiredCard) {
-	if(checkForPass(desiredCard)) {
+
 	
 	    while (!checkInput(desiredCard) ) {
-		     System.out.println("Incorrect input!");
+		     System.out.println("Incorrect input! Press space to pass on discarding");
 		     desiredCard = readConfirmInput().split(" ");
 	     };
 	     
@@ -61,19 +65,9 @@ private void inputValidator(String[] desiredCard) {
 	    	 System.out.print(item + " ");
 	     }
 	     System.out.print("\n");
-	}
-	  
-	else {
-		  System.out.println("Pass");
-	}
+
 }
 
-private boolean checkForPass(String[] desiredCard) {
-	if(tryParseInt(desiredCard[0])) {
-		return true;
-	}
-	return false;
-}
 
  private boolean checkInput(String[] desiredCard) {
 
