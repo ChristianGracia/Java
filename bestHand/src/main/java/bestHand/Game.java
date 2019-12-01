@@ -3,6 +3,9 @@ package bestHand;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class Game {
 
@@ -24,13 +27,26 @@ private void gameLogic() {
 		int counter = 0;
 	    while (counter < 4) {
 	
-	    startTurn(counter);
+	    Player currentPlayer = startTurn(counter);
 	
 	    String[] desiredCard = readConfirmInput().split(" ");
 	    
-	    inputValidator(desiredCard);
+	    int[] indexArr = inputValidator(desiredCard);
 	    
-	//    System.out.println(currentPlayer.getCards().get(desiredCard[0]));
+	    ArrayList<Card> cards = currentPlayer.getCards();
+	    Arrays.sort(indexArr);
+	    int length = indexArr.length;
+	    
+	    for (int i = length - 1; i >= 0; i--) {
+	    	Card current = cards.get(indexArr[i] - 1);
+	    	System.out.println(current.getValue() + current.getSuit() + " removed");
+
+		 cards.remove(indexArr[i] - 1);
+	    	
+	    }
+
+	    currentPlayer.setCards(cards);
+	    
 	    counter++;
 	
 	   }
@@ -40,7 +56,7 @@ private void gameLogic() {
 	  }
 }
 
-private void startTurn(int counter) {
+private Player startTurn(int counter) {
 	int turn = counter;
 	Player currentPlayer = players[turn];
 	System.out.println("Player " + (counter + 1)+ ": " + currentPlayer.getName() + "    Round #" + (getRoundCount() + 1));
@@ -49,15 +65,18 @@ private void startTurn(int counter) {
 	showCards(currentPlayer);
 	System.out.println("\nEnter the numbers of each card you want to exchange. Ex: 1 4 6 7 8");
 	System.out.println("You can exchange 0, 1, 2, 3, 5, or 8 cards. exchanges > 2 require a facecard in the exchange");
+	
+	return currentPlayer;
 }
 
-private void inputValidator(String[] desiredCard) {
+private int[] inputValidator(String[] desiredCard) {
 
 	
 	    while (!checkInput(desiredCard) ) {
 		     System.out.println("Incorrect input! Press space to pass on discarding");
 		     desiredCard = readConfirmInput().split(" ");
 	     };
+	     
 	     
 	     System.out.print("Cards chosen: ");
 	     
@@ -66,6 +85,18 @@ private void inputValidator(String[] desiredCard) {
 	     }
 	     System.out.print("\n");
 
+		 return convertStringArray(desiredCard);
+
+}
+
+private int[] convertStringArray(String[] desiredCard) {
+    int[] cardIndex = new int[desiredCard.length]; 
+    
+    for(int i = 0; i < desiredCard.length; i++) {
+   	 cardIndex[i] = Integer.parseInt(desiredCard[i]);
+    }
+    return cardIndex;
+	
 }
 
 
@@ -93,7 +124,7 @@ private void inputValidator(String[] desiredCard) {
 
 
  private void showCards(Player player) {
-  System.out.println("Your cards:");
+  System.out.println(player.getName() + ", Your cards:");
   int counter = 0;
   for (Card card: player.getCards()) {
 
