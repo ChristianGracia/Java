@@ -24,14 +24,44 @@ public class Game {
 		  
 		  System.out.println("Enter the numbers of each card you want to exchange. Ex: 1 4 6 7 8");
 		  System.out.println("You can exchange 0, 1, 2, 3, 5, or 8 cards. exchanges > 2 require a facecard in the exchange");
+		  
+		  
+		  
 		  String[] desiredCard = readConfirmInput().split(" ");
+		  
+		  while (!checkInput(desiredCard)) {
+			  desiredCard = readConfirmInput().split(" ");
+		  };
 		  
 		  for(String item : desiredCard) {
 			  System.out.println(item);
 		  }
+			  
 		  
 		
 	}
+	
+	private boolean checkInput(String[] desiredCard) {
+		
+		  Boolean check = true;
+		
+		  
+		  for(String item : desiredCard) {
+			  if(tryParseInt(item) == false) {
+				  check = false;
+			  }
+			  
+		  }
+		  if(check) {
+			  return true;
+		  }
+		  else {
+			  return false;
+		  }
+		
+	}
+	
+	
 	
 	 private void showCards(Player player) {
 		  System.out.println("Your cards:");
