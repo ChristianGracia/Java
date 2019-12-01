@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 public class Game {
 
  private int roundCount = 0;
- private int currentTurn = 0;
  private Player[] players = new Player[4];
 
  public Game() {
@@ -16,31 +15,65 @@ public class Game {
    new Player("Joe", deck.dealHand(deck.getDeck(), 8)), new Player("Dan", deck.dealHand(deck.getDeck(), 8)), new Player("Cliff", deck.dealHand(deck.getDeck(), 8)), new Player("Mark", deck.dealHand(deck.getDeck(), 8))
   });
 
-  while (getRoundCount() < 5) {
-	  int counter = 0;
-    while (counter < 4) {
-    int turn = counter;
-    Player currentPlayer = players[turn];
-    System.out.print(currentPlayer.getName() + "\n");
-    showCards(currentPlayer);
-    System.out.println(deck.getDeck().size() + " cards left.");
-    System.out.println("Enter the numbers of each card you want to exchange. Ex: 1 4 6 7 8");
-    System.out.println("You can exchange 0, 1, 2, 3, 5, or 8 cards. exchanges > 2 require a facecard in the exchange");
-
-    String[] desiredCard = readConfirmInput().split(" ");
-
-    while (!checkInput(desiredCard)) {
-     desiredCard = readConfirmInput().split(" ");
-    };
-    counter++;
-
-   }
-   setRoundCount();
-   counter = 0;
-
-  }
+  gameLogic();
 
  }
+
+private void gameLogic() {
+	while (getRoundCount() < 5) {
+		int counter = 0;
+	    while (counter < 4) {
+	
+	    int turn = counter;
+	    Player currentPlayer = players[turn];
+	    System.out.println("Player " + (counter + 1)+ ": " + currentPlayer.getName() + "    Round #" + (getRoundCount() + 1));
+	    System.out.println("Press enter to see your cards....");
+	    readConfirmInput();
+	    showCards(currentPlayer);
+	    System.out.println("\nEnter the numbers of each card you want to exchange. Ex: 1 4 6 7 8");
+	    System.out.println("You can exchange 0, 1, 2, 3, 5, or 8 cards. exchanges > 2 require a facecard in the exchange");
+	
+	    String[] desiredCard = readConfirmInput().split(" ");
+	    
+	    inputValidator(desiredCard);
+	    
+	//    System.out.println(currentPlayer.getCards().get(desiredCard[0]));
+	    counter++;
+	
+	   }
+	   setRoundCount();
+	   counter = 0;
+	
+	  }
+}
+
+private void inputValidator(String[] desiredCard) {
+	if(checkForPass(desiredCard)) {
+	
+	    while (!checkInput(desiredCard) ) {
+		     System.out.println("Incorrect input!");
+		     desiredCard = readConfirmInput().split(" ");
+	     };
+	     
+	     System.out.print("Cards chosen: ");
+	     
+	     for (String item : desiredCard) {
+	    	 System.out.print(item + " ");
+	     }
+	     System.out.print("\n");
+	}
+	  
+	else {
+		  System.out.println("Pass");
+	}
+}
+
+private boolean checkForPass(String[] desiredCard) {
+	if(tryParseInt(desiredCard[0])) {
+		return true;
+	}
+	return false;
+}
 
  private boolean checkInput(String[] desiredCard) {
 
@@ -58,6 +91,8 @@ public class Game {
   } else {
    return false;
   }
+	 
+	 
 
  }
 
@@ -91,14 +126,13 @@ public class Game {
 
 
  private String readConfirmInput() {
+	 String input = "";
 
-  String input = "";
-  while (input == "") {
    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
    try {
 
-    input = reader.readLine();
+     input = reader.readLine();
 
     return input;
    } catch (IOException e) {
@@ -106,7 +140,7 @@ public class Game {
     e.printStackTrace();
    }
 
-  }
+  
   return input;
  }
 
@@ -119,54 +153,45 @@ public class Game {
   }
  }
 
- private int getDesiredCard() {
+// private int getDesiredCard() {
+//
+//  int desiredIndex = 0;
+//
+//  while (true) {
+//
+//   String desiredCard = readConfirmInput().toLowerCase();
+//   if (desiredCard.length() > 0) {
+//    desiredCard = faceCardConverter(desiredCard);
+//
+//    if (tryParseInt(desiredCard) && Integer.parseInt(desiredCard) > 0 && Integer.parseInt(desiredCard) < 15) {
+//     desiredIndex = Integer.parseInt(desiredCard);
+//     break;
+//    }
+//   }
+//  }
+//  return desiredIndex;
+//
+// }
+// private String faceCardConverter(String desiredCard) {
+//  switch (desiredCard.charAt(0)) {
+//   case 'j':
+//    desiredCard = "11";
+//    break;
+//   case 'q':
+//    desiredCard = "12";
+//    break;
+//   case 'k':
+//    desiredCard = "13";
+//    break;
+//   case 'a':
+//    desiredCard = "1";
+//    break;
+//   default:
+//    break;
+//  }
+//  return desiredCard;
+// }
 
-  int desiredIndex = 0;
-
-  while (true) {
-
-   String desiredCard = readConfirmInput().toLowerCase();
-   if (desiredCard.length() > 0) {
-    desiredCard = faceCardConverter(desiredCard);
-
-    if (tryParseInt(desiredCard) && Integer.parseInt(desiredCard) > 0 && Integer.parseInt(desiredCard) < 15) {
-     desiredIndex = Integer.parseInt(desiredCard);
-     break;
-    }
-   }
-  }
-  return desiredIndex;
-
- }
- private String faceCardConverter(String desiredCard) {
-  switch (desiredCard.charAt(0)) {
-   case 'j':
-    desiredCard = "11";
-    break;
-   case 'q':
-    desiredCard = "12";
-    break;
-   case 'k':
-    desiredCard = "13";
-    break;
-   case 'a':
-    desiredCard = "1";
-    break;
-   default:
-    break;
-  }
-  return desiredCard;
- }
-
- public int getCurrentTurn() {
-  return currentTurn;
- }
-
- public void setCurrentTurn() {
-
-  this.currentTurn = this.currentTurn + 1;
-	  
- }
 
 
 }
