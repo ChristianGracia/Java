@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 public class Game {
 	
 	private int roundCount = 0;
+	private int currentTurn = 0;
 	private Player[] players = new Player[4];
 	
 	public Game() {
@@ -14,31 +15,24 @@ public class Game {
 		  setPlayers(new Player[] {
 				   new Player("Joe", deck.dealHand(deck.getDeck(), 8)), new Player("Dan", deck.dealHand(deck.getDeck(), 8)),   new Player("Cliff", deck.dealHand(deck.getDeck(), 8)),   new Player("Mark", deck.dealHand(deck.getDeck(), 8))
 				  });
-		  for(Player player : getPlayers()) {
-			  System.out.println(player.getName());
-		      showCards(player);
-			  System.out.println("\n");
-		  }
 		  
-		  System.out.println(deck.getDeck().size() + " cards left.");
-		  
+		  while(getRoundCount() < 5) {
+		  int turn = getCurrentTurn() % 4;
+		  Player currentPlayer = players[turn];
+		  System.out.print(currentPlayer.getName()+ "\n");
+		  showCards(currentPlayer);
+		  System.out.println(deck.getDeck().size() + " cards left."); 
 		  System.out.println("Enter the numbers of each card you want to exchange. Ex: 1 4 6 7 8");
 		  System.out.println("You can exchange 0, 1, 2, 3, 5, or 8 cards. exchanges > 2 require a facecard in the exchange");
-		  
-		  
-		  
+ 
 		  String[] desiredCard = readConfirmInput().split(" ");
 		  
 		  while (!checkInput(desiredCard)) {
 			  desiredCard = readConfirmInput().split(" ");
-		  };
-		  
-		  for(String item : desiredCard) {
-			  System.out.println(item);
+		   };
+		   setRoundCount();
 		  }
-			  
-		  
-		
+
 	}
 	
 	private boolean checkInput(String[] desiredCard) {
@@ -77,8 +71,8 @@ public class Game {
 		return roundCount;
 	}
 
-	public void setRoundCount(int roundCount) {
-		this.roundCount = roundCount;
+	public void setRoundCount() {
+		this.roundCount = this.roundCount + 1;
 	}
 
 	public Player[] getPlayers() {
@@ -156,6 +150,14 @@ public class Game {
 			    	break;
 			   }
 				return desiredCard;
+			}
+
+			public int getCurrentTurn() {
+				return currentTurn;
+			}
+
+			public void setCurrentTurn(int currentTurn) {
+				this.currentTurn = currentTurn;
 			}
 
 
