@@ -1,13 +1,13 @@
 package bestHand;
-import java.util.ArrayList;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Game {
 	
 	private int roundCount = 0;
 	private Player[] players = new Player[4];
-	public static final String ANSI_RESET = "\033[0m";;
-	public static final String ANSI_RED = "\033[0;31m";
 	
 	public Game() {
 		Deck deck = new Deck();
@@ -21,6 +21,8 @@ public class Game {
 		  }
 		  
 		  System.out.println(deck.getDeck().size() + " cards left.");
+		  
+		  System.out.println("Enter the number of each card you want to exchange");
 	}
 	
 	 private void showCards(Player player) {
@@ -28,13 +30,9 @@ public class Game {
 		  int counter = 0;
 		  for (Card card: player.getCards()) {
 		
-		   System.out.print( "["  +card.getValue() + " " + card.getSuit() + "] #" + ++counter + "     ");
+		   System.out.print( "["  +card.getValue() + "" + card.getSuit() + "] #" + ++counter + "     ");
 
-
-		  }
-		  
-	
-
+		  } 
 		 }
 
 	public int getRoundCount() {
@@ -52,5 +50,75 @@ public class Game {
 	public void setPlayers(Player[] players) {
 		this.players = players;
 	}
+	
+	
+	private String readConfirmInput() {
+
+		  String input = "";
+		  while (input == "") {
+		   BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+		   try {
+
+		    input = reader.readLine();
+
+		    return input;
+		   } catch (IOException e) {
+
+		    e.printStackTrace();
+		   }
+
+		  }
+		  return input;
+		 }
+
+		 private boolean tryParseInt(String value) {
+		  try {
+		   Integer.parseInt(value);
+		   return true;
+		  } catch (NumberFormatException e) {
+		   return false;
+		  }
+		 }
+		 
+		 private int getDesiredCard() {
+
+			  int desiredIndex = 0;
+
+			  while (true) {
+
+			   String desiredCard = readConfirmInput().toLowerCase();
+			   if (desiredCard.length() > 0) {
+			    desiredCard = faceCardConverter(desiredCard);
+			    
+			    if (tryParseInt(desiredCard) && Integer.parseInt(desiredCard) > 0 && Integer.parseInt(desiredCard) < 15) {
+			     desiredIndex = Integer.parseInt(desiredCard);
+			     break;
+			    }
+			   }
+			  }
+			  return desiredIndex;
+
+			 }
+			private String faceCardConverter(String desiredCard) {
+				switch (desiredCard.charAt(0)) {
+			    case 'j':
+			     desiredCard = "11";
+			     break;
+			    case 'q':
+			     desiredCard = "12";
+			     break;
+			    case 'k':
+			     desiredCard = "13";
+			     break;
+			    case 'a':
+			     desiredCard = "1";
+			     break;
+			    default:
+			    	break;
+			   }
+				return desiredCard;
+			}
+
 
 }
