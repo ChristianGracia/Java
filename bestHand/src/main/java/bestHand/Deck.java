@@ -46,6 +46,19 @@ public class Deck {
 	
 
 	}
+	
+	public Card getNewCard() {
+		
+		ArrayList<Card> discardCards = new ArrayList<Card>();
+		discardCards = getDeck();
+		Card card = discardCards.get(0);
+		discardCards.remove(card);
+		System.out.println(card.getValue() + card.getSuit() + " added to deck");
+		setDiscard(discardCards);
+	
+		return card;
+
+	}
 
 	 public ArrayList<Card> dealHand(ArrayList<Card> cards, int count) {
 		ArrayList<Card> handList = new ArrayList<Card>();
