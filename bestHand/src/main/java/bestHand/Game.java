@@ -41,12 +41,21 @@ private void gameLogic() {
 	    
 	    for (int i = length; i > -1; i--) {
 	    	Card current = cards.get(indexArr[i] - 1);
-	    	System.out.println(current.getValue() + current.getSuit() + " removed");
+//	    	System.out.println(current.getValue() + current.getSuit() + " removed");
 	    	cards.remove(current);  
 	    	deck.discardCard(current);
+	    	
+	    	Card newCard = deck.getNewCard();
+	    	ArrayList currentCards = currentPlayer.getCards();
+	    	currentCards.add(newCard);
+
 	    }
 
 	    currentPlayer.setCards(cards);
+	    
+    	System.out.println("\nPress Enter to end turn\n");
+    	showCards(currentPlayer);
+    	readConfirmInput();
 	    
 	    counter++;
 	
