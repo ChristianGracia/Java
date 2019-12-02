@@ -12,8 +12,26 @@ public class Scorer {
 		for(Player player : players) {
 			
 			player.setScore(calculateSum(player));
+			  for (Card card: player.getCards()) {
+
+				   System.out.print("[" + card.getValue() + "" + card.getSuit() + "]");
+
+				  }
+			  System.out.println("\n");
 		}
 		removeFaceCards(getPlayers());
+		
+		for(Player player : players) {
+			
+
+			  for (Card card: player.getCards()) {
+
+				   System.out.print("[" + card.getValue() + "" + card.getSuit() + "]");
+				 
+
+				  }
+			  System.out.println("\n");
+		}
 		
 	}
 
@@ -34,7 +52,7 @@ public class Scorer {
 			}
 		}
 		System.out.println(player.getName() + ":  Sum of cards: " + sum);
-		return sum
+		return sum;
 	}
 	private void removeFaceCards(Player[] players) {
 		
@@ -91,25 +109,21 @@ public class Scorer {
 							
 							ArrayList<Card> cards = player.getCards();
 							
-					       cards.removeIf(t -> t.getValue() == 11);
+					       cards.removeIf(t -> t.getValue() == 13);
 						}
 						break;
 					default:
 						break;
 					}
-					
-	
-				
+
 			       } 
 			
 			
 			
 		}
-			
+			System.out.println("Cards remaining after red wedding: ");
 			for(Player player : players) {
-				for (Card card : player.getCards()) {
-					System.out.print(card.getValue() + card.getSuit() + " ");
-				}
+				System.out.println(player.getName() + ":  " + player.getCards().size());
 			}
 
 	}
