@@ -3,16 +3,16 @@ package bestHand;
 import java.util.ArrayList;
 
 public class Player {
-	
+
 	private int doublesScore = 0;
 	private int straightScore = 0;
 	private int faceCardScore = 0;
 	private int sum = 0;
-	private int totalScore = 0;	
+	private int totalScore = 0;
 	private String name;
 	private ArrayList<Card> cards;
-	
-	public Player(String name, ArrayList<Card> cards)	{
+
+	public Player(String name, ArrayList<Card> cards) {
 		setName(name);
 		setCards(cards);
 	}
@@ -40,7 +40,6 @@ public class Player {
 	public void setDoublesScore(int doublesScore) {
 		this.doublesScore = doublesScore;
 	}
-
 
 	public int getStraightScore() {
 		return straightScore;
