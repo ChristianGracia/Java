@@ -18,23 +18,27 @@ public class Scorer {
 		
 		System.out.println("\n\n");
 		
-		for(Player player : players) {
-			
-			System.out.println(player.getName() + " cards: ");
 
-			  for (Card card: player.getCards()) {
-
-				   System.out.print("[" + card.getValue() + "" + card.getSuit() + "]");
-
-				  }
-			  System.out.println("\n");
-		}
 
 	}
 
-	private void showAllScores(Player[] players2) {
+	private void showAllScores(Player[] players) {
 	for(Player player : players) {
 		
+		sumScores(player);
+
+		System.out.println(player.getName() + " Total Score : " + player.getTotalScore() + " Sums: " + player.getSum() + " Faces: " + player.getFaceCardScore() + " Doubles: " + player.getDoublesScore() + " Straights : " + player.getStraightScore() );
+	
+		 for (Card card: player.getCards()) {
+
+			   System.out.print("[" + card.getValue() + "" + card.getSuit() + "]");
+
+			  }
+		 System.out.print("\n\n");
+	}
+	}
+
+	private void sumScores(Player player) {
 		int sum = player.getSum();
 		int faces = player.getFaceCardScore();
 		int straight = player.getStraightScore();
@@ -42,8 +46,6 @@ public class Scorer {
 		
 		
 		player.setTotalScore(sum + faces + straight + doubles);
-		System.out.println(player.getName() + " Total Score : " + player.getTotalScore() + " Sums: " + player.getSum() + " Faces: " + player.getFaceCardScore() + " Doubles: " + player.getDoublesScore() + " Straights : " + player.getStraightScore() );
-	}
 	}
 
 	private void determineWinner(Player[] players) {
@@ -55,7 +57,7 @@ public class Scorer {
 		}
 	}
 	
-	System.out.println(winner.getName() + " has won! Score:" + winner.getTotalScore());
+	System.out.println("\n" + winner.getName() + " has won! Score:" + winner.getTotalScore());
 
 	}
 
@@ -74,12 +76,14 @@ public class Scorer {
 				if (i > 1) {
 					score += 2 *i;
 				}
-				System.out.println(i);			}
+			}
 
 			System.out.println(player.getName() + " received " + score + " for their doubles");
 			
 			player.setDoublesScore(score);
+	
 		}
+		System.out.println("\n");
 
 	}
 
@@ -108,6 +112,7 @@ public class Scorer {
 			
 			player.setFaceCardScore(score);
 		}
+		System.out.println("\n");
 		
 		
 	
@@ -177,22 +182,12 @@ public class Scorer {
 		
 		}
 
-			System.out.println("Cards remaining after red wedding: ");
+			System.out.println("\nCards remaining after red wedding: ");
 			for(Player player : players) {
 				System.out.println(player.getName() + ":  " + player.getCards().size());
 			}
+			System.out.println("");
 			
-			for(Player player : players) {
-				
-
-				  for (Card card: player.getCards()) {
-
-					   System.out.print("[" + card.getValue() + "" + card.getSuit() + "]");
-					 
-
-					  }
-				  System.out.println("\n");
-			}
 
 	
 	}
