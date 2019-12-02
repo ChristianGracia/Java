@@ -6,6 +6,7 @@ import java.util.Collections;
 public class Deck {
 	private ArrayList<Card> deck;
 	private String[] suitArray = new String[] {"\u2665", "\u2663", "\u2666", "\u2660"};
+	private ArrayList<Card> discard;
 	
 	public Deck() {
 		setDeck(createDeck());
@@ -33,6 +34,17 @@ public class Deck {
 		Collections.shuffle(cards);
 
 		return cards;
+	}
+	
+	public void discardCard(Card card) {
+		
+		ArrayList<Card> discardCards = new ArrayList<Card>();
+		discardCards = getDeck();
+		discardCards.add(card);
+		System.out.println(card.getValue() + card.getSuit() + " added to discard deck");
+		setDiscard(discardCards);
+	
+
 	}
 
 	 public ArrayList<Card> dealHand(ArrayList<Card> cards, int count) {
@@ -70,6 +82,14 @@ public class Deck {
 
 	public String[] getSuitArray() {
 		return suitArray;
+	}
+
+	public ArrayList<Card> getDiscard() {
+		return discard;
+	}
+
+	public void setDiscard(ArrayList<Card> discard) {
+		this.discard = discard;
 	}
 
 

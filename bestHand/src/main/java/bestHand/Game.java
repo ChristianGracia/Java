@@ -11,9 +11,11 @@ public class Game {
 
  private int roundCount = 0;
  private Player[] players = new Player[4];
+ private Deck deck;
 
  public Game() {
-  Deck deck = new Deck();
+  this.deck = new Deck();
+  
   setPlayers(new Player[] {
    new Player("Joe", deck.dealHand(deck.getDeck(), 8)), new Player("Dan", deck.dealHand(deck.getDeck(), 8)), new Player("Cliff", deck.dealHand(deck.getDeck(), 8)), new Player("Mark", deck.dealHand(deck.getDeck(), 8))
   });
@@ -35,14 +37,13 @@ private void gameLogic() {
 	    
 	    ArrayList<Card> cards = currentPlayer.getCards();
 	    Arrays.sort(indexArr);
-	    int length = indexArr.length;
+	    int length = indexArr.length -1;
 	    
-	    for (int i = length - 1; i >= 0; i--) {
+	    for (int i = length; i > -1; i--) {
 	    	Card current = cards.get(indexArr[i] - 1);
 	    	System.out.println(current.getValue() + current.getSuit() + " removed");
-
-		 cards.remove(indexArr[i] - 1);
-	    	
+	    	cards.remove(current);  
+	    	deck.discardCard(current);
 	    }
 
 	    currentPlayer.setCards(cards);
