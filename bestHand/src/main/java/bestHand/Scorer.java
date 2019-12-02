@@ -67,7 +67,7 @@ public class Scorer {
 			}
 			System.out.println(player.getName() + " received " + score + " for their doubles");
 			
-			player.setScore(player.getScore() + score);
+			player.setDoublesScore(score);
 		}
 		
 		
@@ -99,7 +99,7 @@ public class Scorer {
 			
 			System.out.println(player.getName() + " received " + score + " points for face cards left");
 			
-			player.setScore(player.getScore() + score);
+			player.setFaceCardScore(score);
 		}
 		
 		

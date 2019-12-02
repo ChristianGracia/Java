@@ -4,7 +4,12 @@ import java.util.ArrayList;
 
 public class Player {
 	
-	private int score = 0;
+	private int doublesScore = 0;
+	private int facesScore = 0;
+	private int straightScore = 0;
+	private int faceCardScore = 0;
+	private int sum = 0;
+	private int totalScore = 0;	
 	private String name;
 	private ArrayList<Card> cards;
 	
@@ -21,19 +26,59 @@ public class Player {
 		this.name = name;
 	}
 
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int score) {
-		this.score = this.score + score;
-	}
-
 	public ArrayList<Card> getCards() {
 		return cards;
 	}
 
 	public void setCards(ArrayList<Card> cards) {
 		this.cards = cards;
+	}
+
+	public int getDoublesScore() {
+		return doublesScore;
+	}
+
+	public void setDoublesScore(int doublesScore) {
+		this.doublesScore = doublesScore;
+	}
+
+	public int getFacesScore() {
+		return facesScore;
+	}
+
+	public void setFacesScore(int facesScore) {
+		this.facesScore = facesScore;
+	}
+
+	public int getStraightScore() {
+		return straightScore;
+	}
+
+	public void setStraightScore(int straightScore) {
+		this.straightScore = straightScore;
+	}
+
+	public int getFaceCardScore() {
+		return faceCardScore;
+	}
+
+	public void setFaceCardScore(int faceCardScore) {
+		this.faceCardScore = faceCardScore;
+	}
+
+	public int getTotalScore() {
+		return totalScore;
+	}
+
+	public void setTotalScore(int totalScore) {
+		this.totalScore = totalScore;
+	}
+
+	public int getSum() {
+		return sum;
+	}
+
+	public void setSum(int sum) {
+		this.sum = sum;
 	}
 }
