@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Player {
 	
 	private int doublesScore = 0;
-	private int facesScore = 0;
 	private int straightScore = 0;
 	private int faceCardScore = 0;
 	private int sum = 0;
@@ -42,13 +41,6 @@ public class Player {
 		this.doublesScore = doublesScore;
 	}
 
-	public int getFacesScore() {
-		return facesScore;
-	}
-
-	public void setFacesScore(int facesScore) {
-		this.facesScore = facesScore;
-	}
 
 	public int getStraightScore() {
 		return straightScore;

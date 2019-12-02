@@ -8,10 +8,20 @@ public class Scorer {
 	
 	public Scorer(Player[] players) {
 		setPlayers(players);
+	
+		calculateSum(getPlayers());
+		removeFaceCards(getPlayers());
+		checkFaceCards(getPlayers());
+		checkDoubles(getPlayers());
+		showAllScores(getPlayers());
+		determineWinner(getPlayers());
+		
+		System.out.println("\n\n");
 		
 		for(Player player : players) {
 			
-			player.setScore(calculateSum(player));
+			System.out.println(player.getName() + " cards: ");
+
 			  for (Card card: player.getCards()) {
 
 				   System.out.print("[" + card.getValue() + "" + card.getSuit() + "]");
@@ -19,19 +29,20 @@ public class Scorer {
 				  }
 			  System.out.println("\n");
 		}
-		removeFaceCards(getPlayers());
-		checkFaceCards(getPlayers());
-		checkDoubles(getPlayers());
-		determineWinner(getPlayers());
-		showAllScores(getPlayers());
-		
-		
-		
+
 	}
 
 	private void showAllScores(Player[] players2) {
 	for(Player player : players) {
-		System.out.println(player.getName() + " " + player.getScore());
+		
+		int sum = player.getSum();
+		int faces = player.getFaceCardScore();
+		int straight = player.getStraightScore();
+		int doubles = player.getDoublesScore();
+		
+		
+		player.setTotalScore(sum + faces + straight + doubles);
+		System.out.println(player.getName() + " Total Score : " + player.getTotalScore() + " Sums: " + player.getSum() + " Faces: " + player.getFaceCardScore() + " Doubles: " + player.getDoublesScore() + " Straights : " + player.getStraightScore() );
 	}
 	}
 
@@ -39,15 +50,13 @@ public class Scorer {
 	Player winner = players[0];
 	
 	for(Player player: players) {
-		if (player.getScore() > winner.getScore()) {
+		if (player.getTotalScore() > winner.getTotalScore()) {
 			winner = player;
 		}
 	}
 	
-	System.out.println(winner.getName() + " has won! Score:" + winner.getScore());
-	
-	
-		
+	System.out.println(winner.getName() + " has won! Score:" + winner.getTotalScore());
+
 	}
 
 	private void checkDoubles(Player[] players) {
@@ -115,7 +124,8 @@ public class Scorer {
 		this.players = players;
 	}
 	
-	private int calculateSum(Player player) {
+	private void calculateSum(Player[] players) {
+		for ( Player player : players) {
 		int sum = 0;
 		for(Card card : player.getCards()) {
 			sum += card.getValue();
@@ -124,9 +134,9 @@ public class Scorer {
 			}
 		}
 		System.out.println(player.getName() + ":  Sum of cards: " + sum);
-		return sum;
+		player.setSum(sum);
 	}
-	private void removeFaceCards(Player[] players) {
+	}	private void removeFaceCards(Player[] players) {
 		
 	int[] arr = new int[3];
 		
