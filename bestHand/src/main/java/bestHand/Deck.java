@@ -41,7 +41,7 @@ public class Deck {
 		ArrayList<Card> discardCards = new ArrayList<Card>();
 		discardCards = getDeck();
 		discardCards.add(card);
-		System.out.println(card.getValue() + card.getSuit() + " added to discard deck");
+		System.out.println(card.getValue() + card.getSuit() + " removed from your hand");
 		setDiscard(discardCards);
 	}
 	
