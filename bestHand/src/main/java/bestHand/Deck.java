@@ -43,8 +43,6 @@ public class Deck {
 		discardCards.add(card);
 		System.out.println(card.getValue() + card.getSuit() + " added to discard deck");
 		setDiscard(discardCards);
-	
-
 	}
 	
 	public Card getNewCard() {
@@ -53,7 +51,7 @@ public class Deck {
 		discardCards = getDeck();
 		Card card = discardCards.get(0);
 		discardCards.remove(card);
-		System.out.println(card.getValue() + card.getSuit() + " added to deck");
+		System.out.println(card.getValue() + card.getSuit() + " added to your hand.");
 		setDiscard(discardCards);
 	
 		return card;
@@ -73,17 +71,6 @@ public class Deck {
 		return handList;
 		
 	}
-//	 public void drawCard(Player player) {
-//		 
-//		 ArrayList<Card> deck = getDeck();
-//		 Card newCard = deck.remove(0);
-//		 setDeck(deck);
-//		 
-//		 ArrayList<Card> currentCards = player.getCards();
-//		 currentCards.add(newCard);
-//		 player.setCards(currentCards);
-//		 System.out.println("You drew a " + newCard.getValue() + " " + newCard.getSuit());
-//	 }
 
 	public ArrayList<Card> getDeck() {
 		return deck;
