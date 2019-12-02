@@ -60,29 +60,27 @@ public class Scorer {
 	}
 
 	private void checkDoubles(Player[] players) {
-		
-		int[] arr = new int[14];
-		int score = 0;
-		
+
 		for (Player player : players) {
+			
+			int[] arr = new int[14];
+			int score = 0;
 			for (Card card : player.getCards()) {
-				if(arr[card.getValue()] == 0) {
-					arr[card.getValue()]++;
-				}
-				else {
-					System.out.println("+2 Double found for " + player.getName());
-					score += 2;
-				}
+			
+					arr[card.getValue()]++;			
 			}
+			
+			for(int i : arr) {
+				if (i > 1) {
+					score += 2 *i;
+				}
+				System.out.println(i);			}
+
 			System.out.println(player.getName() + " received " + score + " for their doubles");
 			
 			player.setDoublesScore(score);
 		}
-		
-		
 
-	
-		
 	}
 
 	private void checkFaceCards(Player[] players) {
