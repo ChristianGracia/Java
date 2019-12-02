@@ -7,6 +7,10 @@ public class Scorer {
 	public Scorer(Player[] players) {
 		setPlayers(players);
 		
+		for(Player player : players) {
+			calculateSum(player);
+		}
+		
 	}
 
 	public Player[] getPlayers() {
@@ -21,15 +25,19 @@ public class Scorer {
 		int sum = 0;
 		for(Card card : player.getCards()) {
 			sum += card.getValue();
+			if(card.getValue() == 1) {
+				sum += 10;
+			}
 		}
 		System.out.println(player.getName() + ":  Sum of cards: " + sum);
 	}
-//	private void removeFaceCards(Player player) {
-//		int sum = 0;
-//		for(Card card : player.getCards()) {
-//			sum += card.getValue();
+//	private void removeFaceCards(Player[] players) {
+//		for (Player player : players) {
+//			
+//			
+//			
 //		}
-//		System.out.println(player.getName() + ":  Sum of cards: " + sum);
+//
 //	}
 
 }
