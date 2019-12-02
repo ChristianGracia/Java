@@ -19,5 +19,7 @@ After the rounds are over. If any players have the same facecard, it is removed.
 all card numbers are summed with points being added in special cased:
 
 +2 pts per matching card
+
 +5 pts per face card remaining at end
+
 +3 pts +3 for each extra card in a straight
