@@ -1,6 +1,7 @@
 package bestHand;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Scorer {
 	
@@ -15,7 +16,7 @@ public class Scorer {
 		removeFaceCards(getPlayers());
 		checkFaceCards(getPlayers());
 		checkDoubles(getPlayers());
-		sortCards(getPlayers());
+		findStraights(getPlayers());
 		showAllScores(getPlayers());
 		determineWinner(getPlayers());
 		
@@ -25,33 +26,51 @@ public class Scorer {
 
 	}
 
-	private void sortCards(Player[] players) {
+	private void findStraights(Player[] players) {
 		
 		for (Player player : players) {
 			ArrayList<Card> cards = player.getCards();
-			for(int i = 0; i < cards.size(); i++) {
-				cards.get(i).getValue();
-				for(int j = i + 1; j < 13; j++) {
-					int counter = 0;
-					if(cards.removeIf(card -> card.getValue() == card.getValue() + 1)) {
-						counter++;
-						
-						if(counter > 2) {
-							player.setStraightScore(player.getStraightScore() + 3);
+			
+			int[] cardArr = new int[15]; 
+			
+			for(Card card : cards) {
+				cardArr[card.getValue()] += 1;
+			
+			}
+			int counter = 0;
+			for(int i = 1; i < 14; i++) {
+				for(int j = i + 1; j < 14; j++) {
+					
+				
+			
+				if(cardArr[j] != 0) {
+					counter++;
+					cardArr[j] -= 1;
+				}
+				else {
+					if(counter > 2) {
+						int straightScore = 0;
+						while(counter > 3) {
+							straightScore += 3;
+							counter--;
+							
 						}
+
+						player.setStraightScore(straightScore + 3);
 					}
-					else {
-						counter = 0;
-					}
-				
-				
+
+					counter = 0;
+				}
+				}
 			}
-			}
+
 		}
 
 		
 	
 	}
+	
+
 
 	private void showAllScores(Player[] players) {
 	for(Player player : players) {
@@ -79,14 +98,7 @@ public class Scorer {
 		player.setTotalScore(sum + faces + straight + doubles);
 	}
 	
-//	private void findStraights(Player[] players) {
-//		for(Player player : players) {
-//			
-//		
-//			
-//		}
-//		
-//	}
+
 
 	private void determineWinner(Player[] players) {
 	Player winner = players[0];
