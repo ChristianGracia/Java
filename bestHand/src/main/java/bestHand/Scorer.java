@@ -34,7 +34,7 @@ public class Scorer {
 
 			}
 			int counter = 0;
-			for (int i = 1; i < 14; i++) {
+			for (int i = 0; i < 14; i++) {
 				for (int j = i + 1; j < 14; j++) {
 
 					if (cardArr[j] != 0) {
