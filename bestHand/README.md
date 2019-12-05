@@ -23,3 +23,13 @@ All card numbers are summed with points being added in special cases:
 +5 pts per face card remaining at end
 
 +3 pts per 3 card straight and an additional +3 pts for every extra card in straight
+
+
+
+## Game Status 
+
+done, needs refactoring and testing
+
+## Code Review
+
+goals: see where code can be improved
