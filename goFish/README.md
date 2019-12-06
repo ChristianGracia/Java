@@ -13,7 +13,3 @@ Game continues until deck runs out of cards
 ## Game Status 
 
 done, needs refactoring and testing
-
-## Code Review
-
-goals: see where code can be improved
