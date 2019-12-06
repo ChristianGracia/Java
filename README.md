@@ -1,8 +1,8 @@
 # Java
 
-this repo contains programs written in Java
+this repo contains games and programs written in Java
 
-contains programs using:
+using:
 
 **selenium**
 
@@ -15,3 +15,5 @@ contains programs using:
 **jackson**
 
 **spring-boot**
+
+and more!
