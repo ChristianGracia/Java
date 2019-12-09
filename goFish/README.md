@@ -12,4 +12,4 @@ Game continues until deck runs out of cards
 
 ## Game Status 
 
-done, needs refactoring and testing
+fully functional, needs refactoring and testing for bugs
