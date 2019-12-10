@@ -3,13 +3,10 @@ package goFish;
 public class Card {
 	private int value;
 	private String suit;
-	private int numberOfCards;
 	
-	public Card(int value, String suit, int numberOfCards){
+	public Card(int value, String suit){
 		setValue(value);
-		setSuit(suit);
-		setCardNumber(numberOfCards);
-		
+		setSuit(suit);	
 	}
 	public int getValue() {
 		return value;
@@ -22,12 +19,6 @@ public class Card {
 	}
 	public void setSuit(String suit) {
 		this.suit = suit;
-	}
-	public int getCardNumber() {
-		return numberOfCards;
-	}
-	public void setCardNumber(int cardNumber) {
-		this.numberOfCards = cardNumber;
 	}
 
 }

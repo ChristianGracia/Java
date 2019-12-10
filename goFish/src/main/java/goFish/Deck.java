@@ -23,7 +23,7 @@ public class Deck {
 			if(i % 14 == 0) {
 				i = 1;
 			}
-			temp[k] = new Card(i, suitArr[j], k);
+			temp[k] = new Card(i, suitArr[j]);
 		}
 		ArrayList<Card> cards = new ArrayList<Card>();
 		
