@@ -23,3 +23,8 @@ All card numbers are summed with points being added in special cases:
 +5 pts per face card remaining at end
 
 +3 pts per 3 card straight and an additional +3 pts for every extra card in straight
+
+
+### Code Review
+
+Game fully functional, needs refactoring and bug checks for scoring
