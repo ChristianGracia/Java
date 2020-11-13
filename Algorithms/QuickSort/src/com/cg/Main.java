@@ -49,7 +49,7 @@ public class Main {
             }
 
             //empty loop, increment until number is found less then or equal to pivot
-            while(i < j && intArray[i++] <= pivot);
+            while (i < j && intArray[++i] <= pivot);
 
             if (i < j) {
                 intArray[j] = intArray[i];
@@ -57,7 +57,6 @@ public class Main {
         }
 
         intArray[j] = pivot;
-
         return j;
 
 
