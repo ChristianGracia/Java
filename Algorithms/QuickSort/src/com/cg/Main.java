@@ -5,6 +5,8 @@ package com.cg;
 // unstable
 // better then merge sort most times
 
+//choice of pivot can have effect on time complexity depending on the data
+
 public class Main {
 
     public static void main(String[] args) {
