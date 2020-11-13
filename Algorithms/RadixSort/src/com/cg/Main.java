@@ -41,6 +41,10 @@ public class Main {
         }
 
         // adjust count array for number of values that have that digit or less then that digit
+        // last index of the radix (10 for base10) index array is equal to number of values you are sorting
+        // if there are 2 values with a 2 in the tens position and no values with a 0 or 1 in the tens position
+        // then you know that during this digit sort, those two values with two in the tens position will take the first two indices of the temp array
+
         for (int j = 1; j < radix; j++) {
             digitCountArray[j] += digitCountArray[j - 1];
         }
