@@ -34,9 +34,14 @@ public class Main {
 
     public static int partition(int[] intArray, int startIndex, int endIndex) {
 
+
+        //always first index in this implementation
         int pivot = intArray[startIndex];
 
+        //moves left to right for values less then pivot
         int i = startIndex;
+
+        //moves right to left for values greater then pivot
         int j = endIndex;
 
         while (i < j) {
