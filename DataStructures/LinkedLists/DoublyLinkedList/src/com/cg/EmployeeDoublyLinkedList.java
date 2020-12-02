@@ -15,15 +15,49 @@ public class EmployeeDoublyLinkedList {
 
     private int size;
 
-    public void addToFront(Employee employee){
+    public boolean addBeforeIndex(Employee employeeBeingAdded, Employee employee) {
+
+        if (head == null) {
+            return false;
+        }
+
+        EmployeeNode temp = head;
+
+        while (temp.getNext() != null && !temp.getEmployee().equals(employee)) {
+            temp = temp.getNext();
+        }
+
+        if (temp == null) {
+            return false;
+        }
+
+        EmployeeNode nodeBeingAdded = new EmployeeNode(employeeBeingAdded);
+
+        nodeBeingAdded.setPrevious(temp.getPrevious());
+        nodeBeingAdded.setNext(temp);
+        temp.setPrevious(nodeBeingAdded);
+
+        if (head == temp) {
+            head = nodeBeingAdded;
+
+        } else {
+            nodeBeingAdded.getPrevious().setNext(nodeBeingAdded);
+
+        }
+        size++;
+
+        return true;
+
+    }
+
+    public void addToFront(Employee employee) {
 
         EmployeeNode node = new EmployeeNode(employee);
         node.setNext(head);
-        if(head == null){
+        if (head == null) {
 
             tail = node;
-        }
-        else{
+        } else {
             head.setPrevious(node);
         }
 
@@ -31,14 +65,13 @@ public class EmployeeDoublyLinkedList {
         size++;
     }
 
-    public void addToEnd(Employee employee){
+    public void addToEnd(Employee employee) {
 
         EmployeeNode node = new EmployeeNode(employee);
 
-        if(tail == null){
+        if (tail == null) {
             head = node;
-        }
-        else{
+        } else {
 
             tail.setNext(node);
             node.setPrevious(tail);
@@ -51,7 +84,7 @@ public class EmployeeDoublyLinkedList {
     public void printList() {
         EmployeeNode current = head;
 
-        while(current != null){
+        while (current != null) {
             System.out.println(current);
             current = current.getNext();
         }
@@ -59,16 +92,15 @@ public class EmployeeDoublyLinkedList {
 
     public EmployeeNode removeFirstNode() {
 
-        if (isEmpty()){
+        if (isEmpty()) {
             return null;
         }
 
         EmployeeNode removedNode = head;
 
-        if(head.getNext() == null){
+        if (head.getNext() == null) {
             tail = null;
-        }
-        else{
+        } else {
             head.getNext().setPrevious(null);
         }
         head = head.getNext();
@@ -77,18 +109,17 @@ public class EmployeeDoublyLinkedList {
         return removedNode;
     }
 
-    public EmployeeNode removeLastNode(){
+    public EmployeeNode removeLastNode() {
 
-        if(isEmpty()){
+        if (isEmpty()) {
             return null;
         }
 
         EmployeeNode removedNode = tail;
 
-        if(tail.getPrevious() == null){
+        if (tail.getPrevious() == null) {
             head = null;
-        }
-        else{
+        } else {
             tail.getPrevious().setNext(null);
         }
         tail = tail.getPrevious();
