@@ -14,6 +14,14 @@ public class Main {
 
         list.printList();
 
+        list.removeFirstNode();
+
+        list.printList();
+
+        list.removeLastNode();
+
+        list.printList();
+
 	
     }
 }
