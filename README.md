@@ -1,19 +1,6 @@
 # Java
 
-this repo contains games and programs written in Java
+this repo contains algorithms, programs and much more that I made in Java
 
-using:
+Program examples include Docker, Jackson API, Selenium, MySQL, and more
 
-**selenium**
-
-**maven**
-
-**docker**
-
-**mysql**
-
-**jackson**
-
-**spring-boot**
-
-and more!
