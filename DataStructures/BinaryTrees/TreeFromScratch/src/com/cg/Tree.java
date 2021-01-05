@@ -45,4 +45,34 @@ public class Tree {
         }
     }
 
+    public void delete(int value){
+        root = delete(root, value);
+    }
+
+    private TreeNode delete(TreeNode subtreeRoot, int value){
+        if(subtreeRoot == null) {
+            return subtreeRoot;
+        }
+        if(value < subtreeRoot.getData()){
+            subtreeRoot.setLeftChild(delete(subtreeRoot.getLeftChild(), value));
+        }
+
+        else if(value > subtreeRoot.getData()){
+            subtreeRoot.setRightChild(delete(subtreeRoot.getRightChild(), value));
+        }
+
+        else {
+            // cases when node has 0 to 1 children
+            if (subtreeRoot.getLeftChild() == null) {
+                return subtreeRoot.getRightChild();
+            }
+            else if (subtreeRoot.getRightChild() == null){
+                return subtreeRoot.getLeftChild();
+            }
+        }
+
+        return subtreeRoot;
+
+    }
+
 }
