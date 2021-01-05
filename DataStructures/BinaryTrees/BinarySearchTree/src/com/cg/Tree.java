@@ -42,6 +42,12 @@ public class Tree {
         }
     }
 
+    public void traversePreOrder() {
+        if (root != null) {
+            root.traversePreOrder();
+        }
+    }
+
     public void delete(int value) {
         root = delete(root, value);
     }

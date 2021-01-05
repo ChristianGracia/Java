@@ -6,15 +6,19 @@ public class Main {
 
         Tree intTree = new Tree();
 
-        intTree.insert(23);
-        intTree.insert(66);
-        intTree.insert(13);
-        intTree.insert(10);
-        intTree.insert(73);
+        intTree.insert(25);
+        intTree.insert(27);
+        intTree.insert(30);
+        intTree.insert(32);
+        intTree.insert(17);
+
 
         intTree.traverseInOrder();
+        System.out.println();
+        intTree.traversePreOrder();
+        System.out.println();
 
-        System.out.println(intTree.get(23).getData());
+        System.out.println(intTree.get(25).getData());
         System.out.println(intTree.get(999));
 
         System.out.println(intTree.max());

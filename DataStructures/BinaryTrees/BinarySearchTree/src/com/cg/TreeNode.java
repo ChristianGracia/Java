@@ -21,6 +21,17 @@ public class TreeNode {
         }
     }
 
+    public void traversePreOrder() {
+        System.out.print(data + ", ");
+
+        if (leftChild != null) {
+            leftChild.traversePreOrder();
+        }
+        if (rightChild != null) {
+            rightChild.traversePreOrder();
+        }
+    }
+
     public int min() {
         if (leftChild == null) {
             return data;
