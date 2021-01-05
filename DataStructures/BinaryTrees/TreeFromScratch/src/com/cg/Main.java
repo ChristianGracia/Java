@@ -12,6 +12,8 @@ public class Main {
         intTree.insert(10);
         intTree.insert(73);
 
+        intTree.traverseInOrder();
+
 
     }
 }
