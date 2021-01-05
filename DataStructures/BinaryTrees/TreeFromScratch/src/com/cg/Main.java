@@ -17,6 +17,10 @@ public class Main {
         System.out.println(intTree.get(23).getData());
         System.out.println(intTree.get(999));
 
+        System.out.println(intTree.max());
+        System.out.println(intTree.min());
+
+
 
     }
 }
