@@ -6,51 +6,48 @@ public class TreeNode {
     private TreeNode leftChild;
     private TreeNode rightChild;
 
-    public TreeNode(int data){
+    public TreeNode(int data) {
         this.data = data;
     }
 
     public void traverseInOrder() {
 
-        if (leftChild != null){
+        if (leftChild != null) {
             leftChild.traverseInOrder();
         }
-        System.out.println("data = " + data);
-        if (rightChild != null){
+        System.out.print(data + ", ");
+        if (rightChild != null) {
             rightChild.traverseInOrder();
         }
     }
 
-    public int min(){
-        if (leftChild == null){
+    public int min() {
+        if (leftChild == null) {
             return data;
-        }
-        else {
+        } else {
             return leftChild.min();
         }
     }
 
-    public int max(){
-        if (rightChild == null){
+    public int max() {
+        if (rightChild == null) {
             return data;
-        }
-        else {
+        } else {
             return rightChild.max();
         }
     }
 
-    public TreeNode get(int value){
-        if (value == data){
+    public TreeNode get(int value) {
+        if (value == data) {
             return this;
         }
 
-        if(value < data){
-            if(leftChild != null){
+        if (value < data) {
+            if (leftChild != null) {
                 return leftChild.get(value);
             }
-        }
-        else {
-            if (rightChild != null){
+        } else {
+            if (rightChild != null) {
                 return rightChild.get(value);
             }
         }
@@ -59,24 +56,21 @@ public class TreeNode {
 
     }
 
-    public void insert(int value){
-        if(value == data){
+    public void insert(int value) {
+        if (value == data) {
             return;
         }
 
-        if(value < data){
-            if (leftChild == null){
+        if (value < data) {
+            if (leftChild == null) {
                 leftChild = new TreeNode(value);
-            }
-            else{
+            } else {
                 leftChild.insert(value);
             }
-        }
-        else {
-            if (rightChild == null){
+        } else {
+            if (rightChild == null) {
                 rightChild = new TreeNode(value);
-            }
-            else {
+            } else {
                 rightChild.insert(value);
             }
         }
