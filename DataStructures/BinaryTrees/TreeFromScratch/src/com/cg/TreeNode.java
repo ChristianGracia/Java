@@ -21,6 +21,26 @@ public class TreeNode {
         }
     }
 
+    public TreeNode get(int value){
+        if (value == data){
+            return this;
+        }
+
+        if(value < data){
+            if(leftChild != null){
+                return leftChild.get(value);
+            }
+        }
+        else {
+            if (rightChild != null){
+                return rightChild.get(value);
+            }
+        }
+
+        return null;
+
+    }
+
     public void insert(int value){
         if(value == data){
             return;

@@ -14,6 +14,9 @@ public class Main {
 
         intTree.traverseInOrder();
 
+        System.out.println(intTree.get(23).getData());
+        System.out.println(intTree.get(999));
+
 
     }
 }
