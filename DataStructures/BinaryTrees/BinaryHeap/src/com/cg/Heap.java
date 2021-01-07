@@ -25,6 +25,15 @@ public class Heap {
         return 2 * index + (left ? 1 : 2);
     }
 
+    public int peek(){
+        if (isEmpty()){
+            throw new IndexOutOfBoundsException("Heap is empty");
+        }
+        else {
+            return heap[0];
+        }
+    }
+
     public void fixHeapAbove(int index) {
 
         int newValue = heap[index];
